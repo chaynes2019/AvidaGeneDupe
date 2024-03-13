@@ -25,7 +25,7 @@ class Treatment():
         self.treatmentDir = treatmentPath
         self.runDirectories = []
         self.treatmentName = self.treatmentDir.split('/')[-1]
-        self.treatmentDataframe = pd.DataFrame(columns = ["Task Coding Sites", "Length"])
+        self.treatmentDataframe = pd.DataFrame(columns = ["Task Coding Sites", "Number of Task Coding Sites", "Number of Unique Coding Sites", "Viability Sites", "Number of Viability Sites", "Genome Length", "Fraction Task Coding Sites", "Fraction Viability Sites", "Ratio of Viability Sites to Coding Sites", "Genome"])
 
 for subdir in os.listdir(dataDir):
     if '.' in subdir:
@@ -102,6 +102,15 @@ def getLength(runDir):
     #-2 is used here because the length is being pulled from the MostNumerous.dat file in which the length is second-to-last
     length = int(analyzedOrganism.split()[-2])
     return length
+
+def getGenome(runDir):
+    replicateData = os.path.join(runDir, 'data/detail_MostNumerous.dat')
+    datFileContents = getOrganisms(replicateData)
+    analyzedOrganism = datFileContents[-1]
+    
+    #-2 is used here because the length is being pulled from the MostNumerous.dat file in which the length is second-to-last
+    genome = analyzedOrganism.split()[-1]
+    return genome
     
 def knockItOut(genomeString,instructionIndex):
     knuckOutGenome = list(genomeString)
@@ -193,16 +202,35 @@ def getTaskCodingSitesOverRun(runDir):
     #and gives 1 if coding site, 0 if not
     codingSites = [[] for k in range(len(organismsTasks))]
 
+    numCodingSites = 0
+
+    viabilitySites = set()
+
     for site, knockoutOrg in enumerate(knockoutOrganisms):
         knockoutOrganismTasks = getTasks(knockoutOrg)
         
-        for j in range(len(organismsTasks)):
-            if organismsTasks[j] != knockoutOrganismTasks[j]:
-                codingSites[j].append(site)
+        viabilitySite = True
+        for taskIndicator in knockoutOrganismTasks:
+            if taskIndicator != 0:
+                viabilitySite = False
 
-    return codingSites
+        if viabilitySite:
+            viabilitySites.add(site)
+        else:
+            codingSite = False
+            for j in range(len(organismsTasks)):
+                if organismsTasks[j] != knockoutOrganismTasks[j]:
+                    codingSite = True
+                    codingSites[j].append(site)
+            
+            if codingSite:
+                numCodingSites = numCodingSites + 1
 
-def writeTaskCodingSitesInPandasDataFrame(treatment, runDir, taskCodingSites):
+    viabilitySites = sorted(list(viabilitySites))
+
+    return codingSites, viabilitySites, numCodingSites
+
+def writeTaskCodingSitesInPandasDataFrame(treatment, runDir, taskCodingSites, viabilitySites, numUniqueCodingSites):
     runDirElements = runDir.split('/')
     runName = runDirElements[-1]
 
@@ -218,9 +246,14 @@ def writeTaskCodingSitesInPandasDataFrame(treatment, runDir, taskCodingSites):
 
     genomeLength = getLength(runDir)
 
+    fracCodingSites = numUniqueCodingSites / genomeLength
+    fracViabilitySites = len(viabilitySites) / genomeLength
+
+    viabilityToCodingRatio = fracViabilitySites / fracCodingSites
+
     for k in range(9):
         rowName = f"{runName}," + f"{taskNames[k]}"
-        treatment.treatmentDataframe.loc[rowName] = [taskCodingSites[k], genomeLength]
+        treatment.treatmentDataframe.loc[rowName] = [taskCodingSites[k], len(taskCodingSites[k]), numUniqueCodingSites, viabilitySites, len(viabilitySites), genomeLength, fracCodingSites, fracViabilitySites, viabilityToCodingRatio, getGenome(runDir)]
 
 def writeTaskCodingSites(runDir,codingSites):
     writeDirectory = os.path.join(runDir,"data/codingSites.txt")
@@ -239,8 +272,8 @@ def writeExperimentTaskCodingSites(treatmentArray):
             
         treatmentData = []
         for runDir in treatment.runDirectories:
-            taskCodingSites = getTaskCodingSitesOverRun(runDir)
-            writeTaskCodingSitesInPandasDataFrame(treatment, runDir, taskCodingSites)
+            taskCodingSites, viabilitySites, numUniqueCodingSites = getTaskCodingSitesOverRun(runDir)
+            writeTaskCodingSitesInPandasDataFrame(treatment, runDir, taskCodingSites, viabilitySites, numUniqueCodingSites)
 
 linDatFile = ".dat"
 
@@ -249,7 +282,7 @@ writeExperimentTaskCodingSites(Treatments)
 counter = 0
 for treatment in Treatments:
     print(treatment.treatmentDataframe)
-    treatment.treatmentDataframe.to_csv(f"{experimentDir}/{experimentName}-{treatment.treatmentName}-TaskCodingSites.csv")
+    treatment.treatmentDataframe.to_csv(f"{experimentDir}/{experimentName}-{treatment.treatmentName}-TaskCodingSitesWithViabilitySites.csv")
     counter += 1
 
 
