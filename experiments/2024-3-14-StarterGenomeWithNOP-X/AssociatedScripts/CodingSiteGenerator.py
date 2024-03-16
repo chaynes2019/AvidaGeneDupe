@@ -29,8 +29,12 @@ def readLineage(lineageFile):
             itemID = line.split(':')[1]
             preamble[k] = itemID[1:]
 
+
         for k, organism in enumerate(lineage):
-            lineage[k] = parseOrganismInfo(preamble, organism)
+            if k == 0:
+                lineage[k] = parseOrganismInfo(preamble, organism, 1)
+            else:
+                lineage[k] = parseOrganismInfo(preamble, organism, 0)
     
     return lineage
 
@@ -41,11 +45,15 @@ parseOrganismInfo():
 to its corresponding organism string element
 3. Return dictionary
 '''
-def parseOrganismInfo(preamble, organismString):
+def parseOrganismInfo(preamble, organismString, lineageStart):
+    preambleCopy = [preamble[k] for k in range(len(preamble))]
     organismStringElements = organismString.split()
     organismAttributes = dict()
 
-    for k, preambleElement in enumerate(preamble):
+    if lineageStart == 1:
+        preambleCopy.pop(2)
+
+    for k, preambleElement in enumerate(preambleCopy):
         organismAttributes[preambleElement] = organismStringElements[k]
 
     return organismAttributes
@@ -103,4 +111,4 @@ def generateLineageData():
 
     lineageDataframe.to_csv(f"{runName}_LineageDataAtUpdate{updateAtWhichToAnalyze}.csv")
 
-print(readLineage('detail-MostNumLineageAt10000.dat'))
+print(readLineage('detail_MostNumLineage.dat'))
