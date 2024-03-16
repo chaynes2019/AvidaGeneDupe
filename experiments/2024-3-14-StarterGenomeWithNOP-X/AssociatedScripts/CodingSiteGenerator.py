@@ -13,21 +13,21 @@ readLineage():
 '''
 def readLineage(lineageFile):
     with open(lineageFile, 'r') as f:
-        lineageLines = f.readlines()
+        lineageLines = f.readlines()[4:]
         preamble = []
         lineage = []
 
         for k, line in enumerate(lineageLines):
             if '#' in line:
-                preamble.append(line)
-            elif line == '':
+                preamble.append(line[:-1])
+            elif line == '' or line == '\n':
                 continue
             else:
                 lineage.append(line)
 
         for k, line in enumerate(preamble):
-            line
-            preamble[k] = 
+            itemID = line.split(':')[1]
+            preamble[k] = itemID[1:]
 
         for k, organism in enumerate(lineage):
             lineage[k] = parseOrganismInfo(preamble, organism)
@@ -36,10 +36,19 @@ def readLineage(lineageFile):
 
 '''
 parseOrganismInfo():
+1. Split organism line using spaces
+2. Create dictionary by iterating through preamble enumeratively and assigning each preamble element by index
+to its corresponding organism string element
+3. Return dictionary
 '''
-
 def parseOrganismInfo(preamble, organismString):
-    return "Meep!"
+    organismStringElements = organismString.split()
+    organismAttributes = dict()
+
+    for k, preambleElement in enumerate(preamble):
+        organismAttributes[preambleElement] = organismStringElements[k]
+
+    return organismAttributes
 
 def findEventPairs():
     return "Sneap!"
@@ -92,6 +101,6 @@ def generateLineageData():
     runDirElements = runDir.split('/')
     runName = runDirElements[-1]
 
-    lineageDataframe.to_csv(f"{treatmentName}_{runName}_LineageDataAtUpdate{updateAtWhichToAnalyze}.csv")
+    lineageDataframe.to_csv(f"{runName}_LineageDataAtUpdate{updateAtWhichToAnalyze}.csv")
 
-generateLineageData()
+print(readLineage('detail-MostNumLineageAt10000.dat'))
