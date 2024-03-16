@@ -2,7 +2,18 @@ import pandas as pd
 import sys
 import os
 
-def readLineage():
+def readLineage(lineageFile):
+    with open(lineageFile, 'r') as f:
+        lineageLines = f.readlines()
+
+        for k, organism in enumerate(lineageLines):
+            lineageLines[k] = parseOrganismInfo(organism)
+    
+    lineage = lineageLines
+
+    return lineage
+
+def parseOrganismInfo(organismString):
     return "Meep!"
 
 def findEventPairs():
