@@ -2,18 +2,43 @@ import pandas as pd
 import sys
 import os
 
+'''
+readLineage():
+1. Open lineage file
+2. Read contents into list of lines
+3. Separate into preamble, containing the identifiers for the structure of each line, and the organism 
+4. Parse preamble into correctly ordered list of string element identifiers
+3. Run parseOrganismInfo() on each line to convert it into a dictionary of organism attributes
+4. Return lineage as this list of dictionaries
+'''
 def readLineage(lineageFile):
     with open(lineageFile, 'r') as f:
         lineageLines = f.readlines()
+        preamble = []
+        lineage = []
 
-        for k, organism in enumerate(lineageLines):
-            lineageLines[k] = parseOrganismInfo(organism)
+        for k, line in enumerate(lineageLines):
+            if '#' in line:
+                preamble.append(line)
+            elif line == '':
+                continue
+            else:
+                lineage.append(line)
+
+        for k, line in enumerate(preamble):
+            line
+            preamble[k] = 
+
+        for k, organism in enumerate(lineage):
+            lineage[k] = parseOrganismInfo(preamble, organism)
     
-    lineage = lineageLines
-
     return lineage
 
-def parseOrganismInfo(organismString):
+'''
+parseOrganismInfo():
+'''
+
+def parseOrganismInfo(preamble, organismString):
     return "Meep!"
 
 def findEventPairs():
