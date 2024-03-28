@@ -50,6 +50,7 @@ def parseOrganismInfo(preamble, organismString, lineageStart):
     organismStringElements = organismString.split()
     organismAttributes = dict()
 
+    #The first organism in the lineage is lacking parent_muts data; thus, one must readjust
     if lineageStart == 1:
         preambleCopy.pop(2)
 
@@ -58,8 +59,25 @@ def parseOrganismInfo(preamble, organismString, lineageStart):
 
     return organismAttributes
 
-def findEventPairs():
-    return "Sneap!"
+'''
+findEventPairs():
+1. Find Slip event pairs
+2. Find Task event pairs
+3. Return them as a tuple
+'''
+def findEventPairs(lineage):
+    slipEventPairs = findSlipEventPairs(lineage)
+    taskEventPairs = findTaskEventPairs(lineage)
+
+    return (slipEventPairs, taskEventPairs)
+
+'''findSlipEventPairs():
+1. Form ordered list of subdictionaries of insertions and deletions pulled from the lineage data
+2. For each dictionary (organism), examine the length of the insertions and deletions.
+3. If the length of the insertions or deletions > threshold, then add that organism's dictionary from the lineage
+to the event pairs list in a list together with the previous organism.
+'''
+
 
 def generateOrganismData():
     return "Beep!"
