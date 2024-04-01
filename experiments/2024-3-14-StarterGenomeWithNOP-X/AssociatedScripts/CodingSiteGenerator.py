@@ -57,7 +57,62 @@ def parseOrganismInfo(preamble, organismString, lineageStart):
     for k, preambleElement in enumerate(preambleCopy):
         organismAttributes[preambleElement] = organismStringElements[k]
 
+    organismAttributes = parseMutationInfo(organismAttributes)
+
     return organismAttributes
+
+'''
+parseMutationInfo():
+1. If mutation information is present...
+a. Create 3 new lists -- Mutations, Insertions, and Deletions
+b. Split mutation information by comma
+c. Iterate over each mutation in the split list
+d. For each mutation, use the first character to assign the remainder (i.e. the index of the mutation) as an integer to the appropriate list
+2. If mutation information is not present...
+a. Create 3 new lists -- Mutations, Insertions, and Deletions
+b. Leave them empty
+
+The code can directly modify the passed list because Python passes lists by reference
+'''
+def parseMutationInfo(organismAttributes):
+    firstOrganism = False
+    
+    try:
+        mutationInfo = organismAttributes["Mutations from Parent"]
+    except(KeyError):
+        firstOrganism = True
+    
+    if not firstOrganism:
+        mutations = []
+        insertions = []
+        deletions = []
+
+        for mutation in mutationInfo.split(','):
+            digitCount = [1 for k in range(len(mutation)) if (mutation[k].isdigit())]
+            numericalIndexLength = sum(digitCount)
+
+            if mutation[0] == 'M':
+                mutations.append(int(mutation[1:(numericalIndexLength + 1)]))
+            elif mutation[0] == 'I':
+                insertions.append(int(mutation[1:(numericalIndexLength + 1)]))
+            elif mutation[0] == 'D':
+                deletions.append(int(mutation[1:(numericalIndexLength + 1)]))
+            else:
+                print("You have something incorrect in the Mutations from Parent object: {}".format(mutation))
+        
+        organismAttributes["Mutations"] = mutations
+        organismAttributes["Insertions"] = insertions
+        organismAttributes["Deletions"] = deletions
+
+    else:
+        mutations = []
+        insertions = []
+        deletions = []
+
+        organismAttributes["Mutations"] = mutations
+        organismAttributes["Insertions"] = insertions
+        organismAttributes["Deletions"] = deletions
+
 
 '''
 findEventPairs():
