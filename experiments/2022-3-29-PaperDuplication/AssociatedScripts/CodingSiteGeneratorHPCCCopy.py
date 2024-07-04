@@ -126,10 +126,10 @@ def getUpdateBorn(organismString):
     updateBorn = analyzeOutputs[1]
     return updateBorn
 
-def getLength(runDir):
+def getLength(runDir, lineageGenerationIndex):
     replicateData = os.path.join(runDir, f'Timepoint_{desiredUpdateToAnalyze}/data/detail_MostNumerousAt{desiredUpdateToAnalyze}.dat')
     datFileContents = getOrganisms(replicateData)
-    analyzedOrganism = datFileContents[-1]
+    analyzedOrganism = datFileContents[lineageGenerationIndex]
     
     #-2 is used here because the length is being pulled from the MostNumerous.dat file in which the length is second-to-last
     length = int(analyzedOrganism.split()[-2])
@@ -140,10 +140,10 @@ def getViability(organism):
     viability = int(organism.split()[-2])
     return viability
 
-def getGenome(runDir):
+def getGenome(runDir, lineageGenerationIndex):
     replicateData = os.path.join(runDir, f'Timepoint_{desiredUpdateToAnalyze}/data/detail_MostNumerousAt{desiredUpdateToAnalyze}.dat')
     datFileContents = getOrganisms(replicateData)
-    analyzedOrganism = datFileContents[-1]
+    analyzedOrganism = datFileContents[lineageGenerationIndex]
     
     #-2 is used here because the length is being pulled from the MostNumerous.dat file in which the length is second-to-last
     genome = analyzedOrganism.split()[-1]
@@ -289,7 +289,7 @@ def writeTaskCodingSitesInPandasDataFrame(treatment, lineageGenerationIndex, run
                  "XOR",
                  "EQUALS"]
 
-    genomeLength = getLength(runDir)
+    genomeLength = getLength(runDir, lineageGenerationIndex)
 
     fracCodingSites = numUniqueCodingSites / genomeLength
     fracViabilitySites = len(viabilitySites) / genomeLength
@@ -301,7 +301,7 @@ def writeTaskCodingSitesInPandasDataFrame(treatment, lineageGenerationIndex, run
 
     for k in range(9):
         rowName = f"{runName}," + f"{taskNames[k]}"
-        treatment.treatmentDataframe.loc[rowName] = [runName, lineageGenerationIndex, taskNames[k], desiredUpdateToAnalyze, treatment.treatmentName, taskCodingSites[k], len(taskCodingSites[k]), numUniqueCodingSites, viabilitySites, len(viabilitySites), genomeLength, fracCodingSites, fracViabilitySites, viabilityToCodingRatio, getGenome(runDir)]
+        treatment.treatmentDataframe.loc[rowName] = [runName, lineageGenerationIndex, taskNames[k], desiredUpdateToAnalyze, treatment.treatmentName, taskCodingSites[k], len(taskCodingSites[k]), numUniqueCodingSites, viabilitySites, len(viabilitySites), genomeLength, fracCodingSites, fracViabilitySites, viabilityToCodingRatio, getGenome(runDir, lineageGenerationIndex)]
 
 def getAndWriteTaskCodingSites(treatment, runDir):
     dataDir = os.path.join(runDir, f"Timepoint_{desiredUpdateToAnalyze}/data")
