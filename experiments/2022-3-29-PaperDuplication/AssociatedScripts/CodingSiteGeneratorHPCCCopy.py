@@ -304,7 +304,10 @@ def writeTaskCodingSitesInPandasDataFrame(treatment, lineageGenerationIndex, run
         treatment.treatmentDataframe.loc[rowName] = [runName, lineageGenerationIndex, taskNames[k], desiredUpdateToAnalyze, treatment.treatmentName, taskCodingSites[k], len(taskCodingSites[k]), numUniqueCodingSites, viabilitySites, len(viabilitySites), genomeLength, fracCodingSites, fracViabilitySites, viabilityToCodingRatio, getGenome(runDir)]
 
 def getAndWriteTaskCodingSites(treatment, runDir):
-    lineageDetailFiles = [fileName for fileName in os.listdir(runDir) if "FitnessDifferences.dat" in fileName]
+    dataDir = os.path.join(runDir, "data")
+    #The FitnessDifferences.dat files will be stored with the other
+    #analyze output files in the data subdirectory
+    lineageDetailFiles = [fileName for fileName in os.listdir(dataDir) if "FitnessDifferences.dat" in fileName]
     for k in range(len(lineageDetailFiles)):
         orgKnockoutDataFile = lineageDetailFiles[k]
         taskCodingSites, viabilitySites, numUniqueCodingSites = getTaskCodingSitesOverRun(orgKnockoutDataFile)
