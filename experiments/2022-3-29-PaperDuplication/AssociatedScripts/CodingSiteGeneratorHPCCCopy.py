@@ -289,6 +289,7 @@ def writeTaskCodingSitesInPandasDataFrame(treatment, lineageGenerationIndex, run
                  "XOR",
                  "EQUALS"]
 
+    print(f"Lineage Generation Index = {lineageGenerationIndex}")
     genomeLength = getLength(runDir, lineageGenerationIndex)
     print(f"Genome Length = {genomeLength}")
     genome = getGenome(runDir, lineageGenerationIndex)
