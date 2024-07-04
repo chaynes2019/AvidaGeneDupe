@@ -290,6 +290,9 @@ def writeTaskCodingSitesInPandasDataFrame(treatment, lineageGenerationIndex, run
                  "EQUALS"]
 
     genomeLength = getLength(runDir, lineageGenerationIndex)
+    print(f"Genome Length = {genomeLength}")
+    genome = getGenome(runDir, lineageGenerationIndex)
+    print(f"Genome = {genome}")
 
     fracCodingSites = numUniqueCodingSites / genomeLength
     fracViabilitySites = len(viabilitySites) / genomeLength
