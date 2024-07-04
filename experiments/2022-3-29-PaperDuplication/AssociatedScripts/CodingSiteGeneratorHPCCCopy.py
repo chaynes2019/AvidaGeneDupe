@@ -127,7 +127,7 @@ def getUpdateBorn(organismString):
     return updateBorn
 
 def getLength(runDir, lineageGenerationIndex):
-    replicateData = os.path.join(runDir, f'Timepoint_{desiredUpdateToAnalyze}/data/detail_MostNumerousAt{desiredUpdateToAnalyze}.dat')
+    replicateData = os.path.join(runDir, f'Timepoint_{desiredUpdateToAnalyze}/data/detail_MostNumLineageAt{desiredUpdateToAnalyze}.dat')
     datFileContents = getOrganisms(replicateData)
     analyzedOrganism = datFileContents[lineageGenerationIndex]
     
@@ -141,7 +141,7 @@ def getViability(organism):
     return viability
 
 def getGenome(runDir, lineageGenerationIndex):
-    replicateData = os.path.join(runDir, f'Timepoint_{desiredUpdateToAnalyze}/data/detail_MostNumerousAt{desiredUpdateToAnalyze}.dat')
+    replicateData = os.path.join(runDir, f'Timepoint_{desiredUpdateToAnalyze}/data/detail_MostNumLineageAt{desiredUpdateToAnalyze}.dat')
     datFileContents = getOrganisms(replicateData)
     analyzedOrganism = datFileContents[lineageGenerationIndex]
     
@@ -184,7 +184,7 @@ def knockoutDatFile(datFile,dest):
 def createDatAnalyzeCfg(runDir):
         datDir = os.path.join(runDir,f"Timepoint_{desiredUpdateToAnalyze}")
 
-        datFile = os.path.join(datDir,f"data/detail_MostNumerousAt{desiredUpdateToAnalyze}.dat")
+        datFile = os.path.join(datDir,f"data/detail_MostNumLineageAt{desiredUpdateToAnalyze}.dat")
             
         configFile = os.path.join(datDir,'informationAnalyzer.cfg')
         f = open(configFile,'w')
