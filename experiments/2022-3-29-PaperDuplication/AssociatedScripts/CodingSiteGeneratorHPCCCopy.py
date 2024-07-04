@@ -304,7 +304,7 @@ def writeTaskCodingSitesInPandasDataFrame(treatment, lineageGenerationIndex, run
         viabilityToCodingRatio = 0
 
     for k in range(9):
-        rowName = f"{runName}," + f"{taskNames[k]}"
+        rowName = f"{runName}," + f"{lineageGenerationIndex}," + f"{taskNames[k]}"
         treatment.treatmentDataframe.loc[rowName] = [runName, lineageGenerationIndex, taskNames[k], desiredUpdateToAnalyze, treatment.treatmentName, taskCodingSites[k], len(taskCodingSites[k]), numUniqueCodingSites, viabilitySites, len(viabilitySites), genomeLength, fracCodingSites, fracViabilitySites, viabilityToCodingRatio, getGenome(runDir, lineageGenerationIndex)]
 
 def getAndWriteTaskCodingSites(treatment, runDir):
