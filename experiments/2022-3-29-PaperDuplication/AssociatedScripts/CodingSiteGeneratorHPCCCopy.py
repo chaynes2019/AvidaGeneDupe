@@ -307,7 +307,7 @@ def getAndWriteTaskCodingSites(treatment, runDir):
     dataDir = os.path.join(runDir, f"Timepoint_{desiredUpdateToAnalyze}/data")
     #The FitnessDifferences.dat files will be stored with the other
     #analyze output files in the data subdirectory for the timepoint
-    lineageDetailFiles = [fileName for fileName in os.listdir(dataDir) if "FitnessDifferences.dat" in fileName]
+    lineageDetailFiles = [os.path.join(dataDir, fileName) for fileName in os.listdir(dataDir) if "FitnessDifferences.dat" in fileName]
     for k in range(len(lineageDetailFiles)):
         orgKnockoutDataFile = lineageDetailFiles[k]
         taskCodingSites, viabilitySites, numUniqueCodingSites = getTaskCodingSitesOverRun(orgKnockoutDataFile)
