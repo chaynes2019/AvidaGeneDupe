@@ -24,6 +24,9 @@ cp CodingSiteGeneratorHPCCCopy.py ${EXPERIMENT_DIR}/CodingSiteGeneratorHPCCCopy_
 
 cp RunGeneDuplicationAvidaAnalysisScript.py RunGeneDuplicationAvidaAnalysisScript_${ANALYSIS_TIME}.py
 python3 RunGeneDuplicationAvidaAnalysisScript_${ANALYSIS_TIME}.py ${EXPERIMENT_ID} ${ANALYSIS_TIME}
+rm RunGeneDuplicationAvidaAnalysisScript_${ANALYSIS_TIME}.py
+
+rm geneDuplicationDataAnalyzer_${ANALYSIS_TIME}.sh
 
 cd ${EXPERIMENT_DIR}
 
