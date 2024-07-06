@@ -33,6 +33,7 @@ for treatmentInQuestion in possibleTreatments:
                                                                         experimentalID=experimentID)
 
         with open(f'geneDuplicationDataAnalyzer_{updateToAnalyze}.sh', 'w') as f:
+            print(dataAnalysisScriptString)
             f.write(dataAnalysisScriptString)
         
         os.system(f'bash geneDuplicationDataAnalyzer_{updateToAnalyze}.sh >> spopAnalysisLog.txt')
