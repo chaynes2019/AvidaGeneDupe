@@ -330,7 +330,7 @@ def writeExperimentTaskCodingSites(treatmentArray):
         for runDir in treatment.runDirectories:
             getAndWriteTaskCodingSites(treatment, runDir)
             os.chdir(runDir)
-            os.system(f"rm -r Timepoint_{desiredUpdateToAnalyze}")
+            #os.system(f"rm -r Timepoint_{desiredUpdateToAnalyze}")
 
 linDatFile = ".dat"
 
