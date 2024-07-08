@@ -23,6 +23,7 @@ import numpy as np
 import pandas as pd
 import sys
 import uuid
+from natsort import natsorted
 
 desiredUpdateToAnalyze = sys.argv[1]
 
@@ -312,6 +313,18 @@ def getAndWriteTaskCodingSites(treatment, runDir):
     #The FitnessDifferences.dat files will be stored with the other
     #analyze output files in the data subdirectory for the timepoint
     lineageDetailFiles = [os.path.join(dataDir, fileName) for fileName in os.listdir(dataDir) if "FitnessDifferences.dat" in fileName]
+
+    '''
+    Sort the lineage detail files list by number, allowing the program to write the
+    coding sites, et cetera, to the Pandas dataframe in the correct order
+    '''
+    lineageDetailFiles = natsorted(lineageDetailFiles)
+
+    '''
+    Go through the detail file of the knockout results for each member of the
+    lineage. Obtain their coding sites and viability sites and write it down
+    with other pertinent info in the Pandas dataframe
+    '''
     for k in range(len(lineageDetailFiles)):
         orgKnockoutDataFile = lineageDetailFiles[k]
         taskCodingSites, viabilitySites, numUniqueCodingSites = getTaskCodingSitesOverRun(orgKnockoutDataFile)
