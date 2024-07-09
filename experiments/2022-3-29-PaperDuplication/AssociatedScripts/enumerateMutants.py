@@ -33,7 +33,19 @@ def getOrganisms(lineageFile):
         else:
             return organisms
 
-def enumerateMutants(organism):
+def getID(lineageFile, organism):
+    '''1. Split organism line by spaces'''
+    organismElements = organism.split()
+
+    '''2. The ID is the first element in the organism line'''
+    try:
+        id = organismElements[0]
+    except(IndexError) as e:
+        raise IndexError(f"There are no characters in the organism line in {lineageFile}") from e
+
+    return id
+
+def enumerateMutants(lineageFile, organism):
     pass
 
 def writeMutantsFromLineage(treatment, runName, lineageFile):
