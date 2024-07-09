@@ -13,7 +13,7 @@ dataframe = pd.DataFrame(["Run ID",
 def getOrganisms(lineageFile):
     with open(lineageFile,'r') as datFile:
         lines = datFile.readlines()
-        initalOrgPos = 0
+        initialOrgPos = 0
         for k,line in enumerate(lines):
             if (line[0] != '') & (line[0] != '#') & (line[0] != '\n'):
                 initialOrgPos = k
@@ -28,10 +28,10 @@ def getOrganisms(lineageFile):
             else:
                 continue
 
-        if(len(organisms) > 0):
-            return organisms
+        if organisms == []:
+            raise ValueError(f"The lineage file has no organisms; check file provided: {lineageFile}")
         else:
-            print("Error: please check code")
+            return organisms
 
 def enumerateMutants(organism):
     pass
