@@ -30,7 +30,8 @@ dataframe = pd.DataFrame(columns = ["Run ID",
                           "Update Analyzed",
                           "Treatment",
                           "Point Mutants",
-                          "Slip-Insertion Mutants"])
+                          "Slip-Insertion Mutants",
+                          "Genome"])
 
 for subdir in os.listdir(dataDir):
     if subdir not in ['Baseline-Treatment', 'Slip-duplicate']:
@@ -65,6 +66,10 @@ def getOrganisms(lineageFile):
             raise ValueError(f"The lineage file has no organisms; check file provided: {lineageFile}")
         else:
             return organisms
+
+def getGenome(organism):
+    genome = analyzedOrganism.split()[-1]
+    return genome
 
 def getID(lineageFile, organism):
     '''1. Split organism line by spaces'''
@@ -171,9 +176,10 @@ def writeMutantsFromLineage(treatment, runName, lineageFile):
         pointMutants, slipInsertionMutants = enumerateMutantInfo(lineageFile, organisms[lineageGenerationIndex])
 
         run_name = runName.split('/')[-1]
+        genome = getGenome(organisms[lineageGenerationIndex])
 
         '''3. Write that in a Pandas dataframe'''
-        dataframe.loc[f"{run_name}" + f",{lineageGenerationIndex}"] = [run_name, lineageGenerationIndex, updateToBeAnalyzed, treatment.treatmentName, pointMutants, slipInsertionMutants]
+        dataframe.loc[f"{run_name}" + f",{lineageGenerationIndex}"] = [run_name, lineageGenerationIndex, updateToBeAnalyzed, treatment.treatmentName, pointMutants, slipInsertionMutants, genome]
 
 for treatment in Treatments:
         treatmentName = treatment.treatmentName
