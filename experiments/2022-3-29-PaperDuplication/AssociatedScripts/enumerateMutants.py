@@ -1,0 +1,50 @@
+import pandas as pd
+import sys
+
+updateToBeAnalyzed = sys.argv[1]
+
+dataframe = pd.DataFrame(["Run ID",
+                          "Lineage Generation Index",
+                          "Update Analyzed",
+                          "Treatment"
+                          "Point Mutants",
+                          "Slip-Insertion Mutants"])
+
+def getOrganisms(lineageFile):
+    with open(lineageFile,'r') as datFile:
+        lines = datFile.readlines()
+        initalOrgPos = 0
+        for k,line in enumerate(lines):
+            if (line[0] != '') & (line[0] != '#') & (line[0] != '\n'):
+                initialOrgPos = k
+                break
+            else:
+                continue
+
+        organisms = []
+        for i in range(initialOrgPos,len(lines)):
+            if(lines[i] != ''):
+                organisms.append(lines[i])
+            else:
+                continue
+
+        if(len(organisms) > 0):
+            return organisms
+        else:
+            print("Error: please check code")
+
+def enumerateMutants(organism):
+    pass
+
+def writeMutantsFromLineage(treatment, runName, lineageFile):
+    '''1. Read in a lineage data file'''
+    organisms = getOrganisms(lineageFile)
+
+    for lineageGenerationIndex in range(len(organisms)):
+        '''At each lineage generation index:'''
+
+        '''2. Find point mutants and slip-insertion mutants'''
+        pointMutants, slipInsertionMutants = enumerateMutants(organisms[lineageGenerationIndex])
+
+        '''3. Write that in a Pandas dataframe'''
+        dataframe[lineageGenerationIndex] = [runName, lineageGenerationIndex, updateToBeAnalyzed, treatment, pointMutants, slipInsertionMutants]
