@@ -1,14 +1,47 @@
 import pandas as pd
+import os
 import sys
 
 updateToBeAnalyzed = sys.argv[1]
 
-dataframe = pd.DataFrame(["Run ID",
+runDirectories = []
+Treatments = []
+treatmentParameters = {"Baseline-Treatment":[0.0025, 0.0, 0.0, 0.05, 0.05, 0.0, 0],
+"Slip-NOP":[0.0, 0.0, 0.0, 0.0, 0.0, 0.05, 1],
+"Slip-duplicate":[0.0, 0.0, 0.0, 0.0, 0.0, 0.05, 0],
+"Slip-scatter":[0.0, 0.0, 0.0, 0.0, 0.0, 0.05, 5],
+"Slip-scramble":[0.0, 0.0, 0.0, 0.0, 0.0, 0.05, 3],
+"Slip-random":[0.0, 0.0, 0.0, 0.0, 0.0, 0.05, 2],
+"High-Mutation":[0.0025,0.0075,0.0075,0.05,0.05,0.0,0]}
+stream = os.popen('pwd')
+pwd = stream.read().rstrip()
+experimentDir = pwd
+dataDir = pwd
+experimentName = pwd.split('/')[-1]
+
+class Treatment():
+    def __init__(self,treatmentPath):
+        self.treatmentDir = treatmentPath
+        self.runDirectories = []
+        self.treatmentName = self.treatmentDir.split('/')[-1]
+
+dataframe = pd.DataFrame(columns = ["Run ID",
                           "Lineage Generation Index",
                           "Update Analyzed",
-                          "Treatment"
+                          "Treatment",
                           "Point Mutants",
                           "Slip-Insertion Mutants"])
+
+for subdir in os.listdir(dataDir):
+    if subdir not in ['Baseline-Treatment', 'Slip-duplicate']:
+        continue
+    treatment = Treatment(os.path.join(dataDir,subdir))
+    Treatments.append(treatment)
+
+    for run_dir in os.listdir(treatment.treatmentDir):
+        if not 'run_' in run_dir:
+            continue
+        treatment.runDirectories.append(os.path.join(treatment.treatmentDir,run_dir))
 
 def getOrganisms(lineageFile):
     with open(lineageFile,'r') as datFile:
@@ -62,7 +95,7 @@ def enumerateMutantInfo(lineageFile, organism):
 
         '''Split all the organism line elements into a list.
          Then, split all the individual mutations into a list'''
-        mutantInfo = organism.split()[1]
+        mutantInfo = organism.split()[2]
         mutations = mutantInfo.split(',')
 
         '''Collect all the point mutations and count the number
@@ -71,8 +104,12 @@ def enumerateMutantInfo(lineageFile, organism):
         for k in range(len(mutations)):
             mutation = mutations[k]
 
+            digitCount = [1 for j in range(len(mutation)) if (mutation[j].isdigit())]
+            numericalIndexLength = sum(digitCount)
+
             mutationType = mutation[0]
-            mutationIndex = mutation[1:]
+            mutationIndex = mutation[1:(numericalIndexLength + 1)]
+            
             try:
                 mutationIndex = int(mutationIndex)
             except ValueError:
@@ -97,14 +134,22 @@ def enumerateMutantInfo(lineageFile, organism):
         '''If there are more than 10 insertions, it is almost
         certain that a slip-insertion has happened'''
         if insertionCounter > 10:
-            for k in range(len(mutation)):
+            for k in range(len(mutations)):
                 '''Since the mutations are already sorted by
                 index, this should be already sorted in increasing
                 order'''
                 mutation = mutations[k]
 
+                digitCount = [1 for j in range(len(mutation)) if (mutation[j].isdigit())]
+                numericalIndexLength = sum(digitCount)
+
                 mutationType = mutation[0]
-                mutationIndex = int(mutation[1:])
+                mutationIndex = mutation[1:(numericalIndexLength + 1)]
+
+                try:
+                    mutationIndex = int(mutationIndex)
+                except ValueError:
+                    raise ValueError(f"The mutation type was {mutationType} and the mutationIndex was {mutationIndex}")
 
                 '''Add all insertions to the slip-insertion
                 collection -- this will be pruned in the next
@@ -127,3 +172,13 @@ def writeMutantsFromLineage(treatment, runName, lineageFile):
 
         '''3. Write that in a Pandas dataframe'''
         dataframe[lineageGenerationIndex] = [runName, lineageGenerationIndex, updateToBeAnalyzed, treatment, pointMutants, slipInsertionMutants]
+
+for treatment in Treatments:
+        treatmentName = treatment.treatmentName
+        print(treatmentName)
+        
+        for runDir in treatment.runDirectories:
+            lineageFile = os.path.join(runDir, f"Timepoint_{updateToBeAnalyzed}/data/detail_MostNumLineageAt{updateToBeAnalyzed}.dat")
+            writeMutantsFromLineage(treatment, runDir, lineageFile)
+
+dataframe.to_csv(f"{experimentDir}/{experimentName}-{treatment.treatmentName}-2022-3-29-PaperDuplication-LineageMutations.csv")
