@@ -68,7 +68,7 @@ def getOrganisms(lineageFile):
             return organisms
 
 def getGenome(organism):
-    genome = analyzedOrganism.split()[-1]
+    genome = organism.split()[-1]
     return genome
 
 def getID(lineageFile, organism):
