@@ -173,7 +173,7 @@ def writeMutantsFromLineage(treatment, runName, lineageFile):
         run_name = runName.split('/')[-1]
 
         '''3. Write that in a Pandas dataframe'''
-        dataframe.loc[f"{run_name}" + f"{lineageGenerationIndex}"] = [run_name, lineageGenerationIndex, updateToBeAnalyzed, treatment.treatmentName, pointMutants, slipInsertionMutants]
+        dataframe.loc[f"{run_name}" + f",{lineageGenerationIndex}"] = [run_name, lineageGenerationIndex, updateToBeAnalyzed, treatment.treatmentName, pointMutants, slipInsertionMutants]
 
 for treatment in Treatments:
         treatmentName = treatment.treatmentName
