@@ -1,0 +1,30 @@
+#filetype genotype_data
+#format id update_born parent_muts task task task task task task task task task viable gest_time efficiency length sequence 
+
+# Legend:
+# 1: Genotype ID
+# 2: Update Born
+# 3: Mutations from Parent
+# 4: Not
+# 5: Nand
+# 6: And
+# 7: OrNot
+# 8: Or
+# 9: AndNot
+# 10: Nor
+# 11: Xor
+# 12: Equals
+# 13: Is Viable (0/1)
+# 14: Gestation Time
+# 15: Rep. Efficiency
+# 16: Genome Length
+# 17: Genome Sequence
+
+1 -1  0 0 0 0 0 0 0 0 0 1 389 0.249357 100 wzcagcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccczvfcaxgab 
+18 78 M52cA 0 0 0 0 0 0 0 0 0 1 389 0.249357 100 wzcagcccccccccccccccccccccccccccccccccccccccccccccccAcccccccccccccccccccccccccccccccccccccczvfcaxgab 
+43 104 M11cr 0 0 0 0 0 0 0 0 0 1 388 0.25 100 wzcagccccccrccccccccccccccccccccccccccccccccccccccccAcccccccccccccccccccccccccccccccccccccczvfcaxgab 
+783 160 M18cd 0 0 0 0 0 0 0 0 0 1 387 0.250646 100 wzcagccccccrccccccdcccccccccccccccccccccccccccccccccAcccccccccccccccccccccccccccccccccccccczvfcaxgab 
+6091 253 M66cq 0 0 0 0 0 0 0 0 0 1 387 0.250646 100 wzcagccccccrccccccdcccccccccccccccccccccccccccccccccAcccccccccccccqcccccccccccccccccccccccczvfcaxgab 
+28461 614 M31cA 0 0 0 0 0 0 0 0 0 1 387 0.250646 100 wzcagccccccrccccccdccccccccccccAccccccccccccccccccccAcccccccccccccqcccccccccccccccccccccccczvfcaxgab 
+32862 682 M13cf,M50cb 0 0 0 0 0 0 0 0 0 1 383 0.24282 100 wzcagccccccrcfccccdccccccccccccAccccccccccccccccccbcAcccccccccccccqcccccccccccccccccccccccczvfcaxgab 
+47825 924 M30cu 0 0 0 0 0 0 0 0 0 1 383 0.24282 100 wzcagccccccrcfccccdcccccccccccuAccccccccccccccccccbcAcccccccccccccqcccccccccccccccccccccccczvfcaxgab 

@@ -1,0 +1,31 @@
+#filetype genotype_data
+#format id update_born parent_muts task task task task task task task task task viable gest_time efficiency length sequence 
+
+# Legend:
+# 1: Genotype ID
+# 2: Update Born
+# 3: Mutations from Parent
+# 4: Not
+# 5: Nand
+# 6: And
+# 7: OrNot
+# 8: Or
+# 9: AndNot
+# 10: Nor
+# 11: Xor
+# 12: Equals
+# 13: Is Viable (0/1)
+# 14: Gestation Time
+# 15: Rep. Efficiency
+# 16: Genome Length
+# 17: Genome Sequence
+
+1 -1  0 0 0 0 0 0 0 0 0 1 389 0.249357 100 wzcagcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccczvfcaxgab 
+4911 237 M59cn 0 0 0 0 0 0 0 0 0 1 388 0.25 100 wzcagccccccccccccccccccccccccccccccccccccccccccccccccccccccnccccccccccccccccccccccccccccccczvfcaxgab 
+9148 315 M52co 0 0 0 0 0 0 0 0 0 1 387 0.250646 100 wzcagcccccccccccccccccccccccccccccccccccccccccccccccoccccccnccccccccccccccccccccccccccccccczvfcaxgab 
+9969 329 M65cy 0 0 0 0 0 0 0 0 0 1 386 0.251295 100 wzcagcccccccccccccccccccccccccccccccccccccccccccccccoccccccncccccyccccccccccccccccccccccccczvfcaxgab 
+25558 598 M79cs,D80c,I91v 0 0 0 0 0 0 0 0 0 1 284 0.341549 100 wzcagcccccccccccccccccccccccccccccccccccccccccccccccoccccccncccccycccccccccccccscccccccccczvvfcaxgab 
+33066 728 M36ct 0 0 0 0 0 0 0 0 0 1 283 0.342756 100 wzcagccccccccccccccccccccccccccccccctcccccccccccccccoccccccncccccycccccccccccccscccccccccczvvfcaxgab 
+38532 821 M35cl 0 0 0 0 0 0 0 0 0 1 283 0.342756 100 wzcagccccccccccccccccccccccccccccccltcccccccccccccccoccccccncccccycccccccccccccscccccccccczvvfcaxgab 
+47441 973 M35lo 0 0 0 0 0 0 0 0 0 1 283 0.342756 100 wzcagccccccccccccccccccccccccccccccotcccccccccccccccoccccccncccccycccccccccccccscccccccccczvvfcaxgab 
+54078 1084 I5c,I6c,I7c,I8c,I9c,I10c,I11c,I12c,I13c,I14c,I15c,I16c,I17c,I18c,I19c,I20c,I21c,I22c,I23c,I24c,I25c,I26c,I27c,I28c,I29c,I30c,I31c,I32c,I33c,I34c,I35o,I36t,I37c,I38c,I39c,I40c,I41c,I42c,I43c,I44c,I45c,I46c,I47c,I48c,I49c,I50c,I51c,I52o,I53c,I54c,I55c,I56c,I57c,I59n,I65y,I79s 1 0 0 0 0 0 0 0 0 1 446 0.343049 156 wzcagccccccccccccccccccccccccccccccotcccccccccccccccoccccccncccccycccccccccccccscccccccccccotcccccccccccccccoccccccncccccycccccccccccccscccccccccczvvfcaxgab 
