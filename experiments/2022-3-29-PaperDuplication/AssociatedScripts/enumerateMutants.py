@@ -168,7 +168,7 @@ def writeMutantsFromLineage(treatment, runName, lineageFile):
         '''At each lineage generation index:'''
 
         '''2. Find point mutants and slip-insertion mutants'''
-        pointMutants, slipInsertionMutants = enumerateMutantInfo(organisms[lineageGenerationIndex])
+        pointMutants, slipInsertionMutants = enumerateMutantInfo(lineageFile, organisms[lineageGenerationIndex])
 
         '''3. Write that in a Pandas dataframe'''
         dataframe[lineageGenerationIndex] = [runName, lineageGenerationIndex, updateToBeAnalyzed, treatment, pointMutants, slipInsertionMutants]
