@@ -171,7 +171,7 @@ def writeMutantsFromLineage(treatment, runName, lineageFile):
         pointMutants, slipInsertionMutants = enumerateMutantInfo(lineageFile, organisms[lineageGenerationIndex])
 
         '''3. Write that in a Pandas dataframe'''
-        dataframe[lineageGenerationIndex] = [runName, lineageGenerationIndex, updateToBeAnalyzed, treatment, pointMutants, slipInsertionMutants]
+        dataframe.loc[lineageGenerationIndex] = [runName, lineageGenerationIndex, updateToBeAnalyzed, treatment, pointMutants, slipInsertionMutants]
 
 for treatment in Treatments:
         treatmentName = treatment.treatmentName
@@ -181,4 +181,4 @@ for treatment in Treatments:
             lineageFile = os.path.join(runDir, f"Timepoint_{updateToBeAnalyzed}/data/detail_MostNumLineageAt{updateToBeAnalyzed}.dat")
             writeMutantsFromLineage(treatment, runDir, lineageFile)
 
-dataframe.to_csv(f"{experimentDir}/{experimentName}-{treatment.treatmentName}-2022-3-29-PaperDuplication-LineageMutations.csv")
+dataframe.to_csv(f"{experimentDir}/{experimentName}-LineageMutations.csv")
