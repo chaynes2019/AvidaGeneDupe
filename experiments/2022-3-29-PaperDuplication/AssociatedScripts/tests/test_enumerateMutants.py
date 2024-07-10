@@ -12,6 +12,11 @@ def test_allDeletions():
     testFilePath = os.path.join(wd, "tests/TestFiles/testAllDeletionsFile.dat")
     assert enumerateMutantInfo(testFilePath, "25 10 D25,D40,D60,D61,D62 meep beep sheep \n") == ([], [])
 
+def test_singleSiteInsertionTest():
+    wd = os.getcwd()
+    testFilePath = os.path.join(wd, "tests/TestFiles/testAllInsertionsFile.dat")
+    assert enumerateMutantInfo(testFilePath, "25 10 I25,I40,I60,I61,I62 meep beep sheep \n") == ([], [])
+
 def test_enumeratingBaselineTreatmentPointMutations():
     wd = os.getcwd()
     testFilePath = os.path.join(wd, "tests/TestFiles/testBaseline-TreatmentFile.dat")
