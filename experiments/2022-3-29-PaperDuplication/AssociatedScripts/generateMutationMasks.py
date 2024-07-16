@@ -254,4 +254,4 @@ for treatment in Treatments:
                                                         lineageGenerationIdx,
                                                         lineageFile)
 
-                mutationMasksDataframe.to_csv(f"{experimentDir}/{experimentName}-{treatment}-{runName}-Timepoint{updateToBeAnalyzed}-{lineageGenerationIdx}-LineageMutationMasks.csv")
+                mutationMasksDataframe.to_csv(f"{experimentDir}/{experimentName}-{treatment.treatmentName}-{runName}-Timepoint{updateToBeAnalyzed}-{lineageGenerationIdx}-LineageMutationMasks.csv")
