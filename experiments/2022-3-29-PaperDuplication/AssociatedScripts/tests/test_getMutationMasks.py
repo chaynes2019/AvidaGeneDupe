@@ -17,12 +17,49 @@ def test_singlePointMutation():
                      [],
                      [])
     
+    childSourceMap = list(range(len(parent_genome)))
+    childSourceMap[53] = -1
+
     expectedResult = pd.DataFrame(
         {
-            "CHILD_SOURCE_MAP": range(len(parent_genome)),
+            "Site": range(len(child_genome)),
+            "CHILD_SOURCE_MAP": childSourceMap,
+            "DELETION_MUTATION_BOOL_MASK": [False] * len(parent_genome),
             "POINT_MUTATION_BOOL_MASK": [i == 53 for i in range(len(child_genome))],
             "SLIP_INSERTION_BOOL_MASK": [False] * len(parent_genome),
             "SINGLE_INSERTION_BOOL_MASK": [False] * len(parent_genome),
+            "GENOME_CHARACTERS": [child_genome[k] for k in range(len(child_genome))]
+        }
+    )
+
+    pd.testing.assert_frame_equal(
+        actualResult, expectedResult
+    )
+
+
+def test_singleInsertionMutation():
+    parent_genome = "wzgcccgab"
+    child_genome = "wzgcqccgab"
+
+    actualResult = getMutationMasks(
+                     parent_genome,
+                     child_genome,
+                     [],
+                     [],
+                     [4])
+    
+    singleInsertionMask = [False] * len(child_genome)
+    singleInsertionMask[4] = True
+
+    expectedResult = pd.DataFrame(
+        {
+            "Site": range(len(child_genome)),              
+            "CHILD_SOURCE_MAP": [0, 1, 2, 3, -1, 4, 5, 6, 7, 8],
+            "DELETION_MUTATION_BOOL_MASK": [False] * len(child_genome),
+            "POINT_MUTATION_BOOL_MASK": [False] * len(child_genome),
+            "SLIP_INSERTION_BOOL_MASK": [False] * len(child_genome),
+            "SINGLE_INSERTION_BOOL_MASK" : singleInsertionMask,                
+            "GENOME_CHARACTERS": [child_genome[k] for k in range(len(child_genome))],
         }
     )
 
