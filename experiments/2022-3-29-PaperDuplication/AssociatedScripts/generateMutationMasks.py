@@ -2,9 +2,52 @@ import pandas as pd
 from Bio import Align
 import itertools as it
 from typing import List
+import os
+import sys
 
 def getAlignments():
     pass
+
+def getOrganisms(lineageFile):
+    with open(lineageFile,'r') as datFile:
+        lines = datFile.readlines()
+        initialOrgPos = 0
+        for k,line in enumerate(lines):
+            if (line[0] != '') & (line[0] != '#') & (line[0] != '\n'):
+                initialOrgPos = k
+                break
+            else:
+                continue
+
+        organisms = []
+        for i in range(initialOrgPos,len(lines)):
+            if(lines[i] != ''):
+                organisms.append(lines[i])
+            else:
+                continue
+
+        if organisms == []:
+            raise ValueError(f"The lineage file has no organisms; check file provided: {lineageFile}")
+        else:
+            return organisms
+
+def getGenome(organism):
+    genome = organism.split()[-1]
+    return genome
+
+def getSequencePairsFromLineage(lineage_file):
+    organisms = getOrganisms(lineage_file)
+    
+    sequence_pair_collection = []
+
+    for k in range(len(organisms) - 1):
+        parent_sequence = getGenome(organisms[k])
+        child_sequence = getGenome(organisms[k + 1])
+
+        sequence_pair_collection.append((parent_sequence, child_sequence))
+    
+    return sequence_pair_collection
+
 
 def getChildSourceMap(parent_sequence: str,
                       child_sequence: str,
@@ -117,10 +160,10 @@ def getMutationMasks(parent_sequence: str,
                      point_mutants: List[int],
                      insertion_mutants: List[int],
                      deletion_mutants: List[int],
-                     ) -> pd.DataFrame:
-    
-    #runDirElements = runDir.split('/')
-    #runName = runDirElements[-1]
+                     treatment,
+                     runName,
+                     lineageGenerationIndex,
+                     lineageFile) -> pd.DataFrame:
     
     aligner = Align.PairwiseAligner()
     aligner.open_gap_score = -0.25
@@ -133,12 +176,11 @@ def getMutationMasks(parent_sequence: str,
 
     return pd.DataFrame(
         {
-            
-            #"Treatment": treatment.treatmentName,
-            #"Run ID": runName,
-            #"Lineage Generation Index": lineageGenerationIndex,
             "Site": range(len(child_sequence)),
-            #"Update Analyzed": updateToBeAnalyzed,
+            "Treatment": treatment.treatmentName,
+            "Run ID": runName,
+            "Lineage Generation Index": lineageGenerationIndex,
+            "Update Analyzed": updateToBeAnalyzed,
             "CHILD_SOURCE_MAP": childSourceMap,
             "DELETION_MUTATION_BOOL_MASK": [i in deletionMutations for i in range(len(child_sequence))],
             "POINT_MUTATION_BOOL_MASK": [i in pointMutations for i in range(len(child_sequence))],
@@ -147,3 +189,69 @@ def getMutationMasks(parent_sequence: str,
             "GENOME_CHARACTERS": [child_sequence[k] for k in range(len(child_sequence))]
         }
     )
+
+updateToBeAnalyzed = sys.argv[1]
+
+runDirectories = []
+Treatments = []
+treatmentParameters = {"Baseline-Treatment":[0.0025, 0.0, 0.0, 0.05, 0.05, 0.0, 0],
+"Slip-NOP":[0.0, 0.0, 0.0, 0.0, 0.0, 0.05, 1],
+"Slip-duplicate":[0.0, 0.0, 0.0, 0.0, 0.0, 0.05, 0],
+"Slip-scatter":[0.0, 0.0, 0.0, 0.0, 0.0, 0.05, 5],
+"Slip-scramble":[0.0, 0.0, 0.0, 0.0, 0.0, 0.05, 3],
+"Slip-random":[0.0, 0.0, 0.0, 0.0, 0.0, 0.05, 2],
+"High-Mutation":[0.0025,0.0075,0.0075,0.05,0.05,0.0,0]}
+stream = os.popen('pwd')
+pwd = stream.read().rstrip()
+experimentDir = pwd
+dataDir = pwd
+experimentName = pwd.split('/')[-1]
+
+class Treatment():
+    def __init__(self,treatmentPath):
+        self.treatmentDir = treatmentPath
+        self.runDirectories = []
+        self.treatmentName = self.treatmentDir.split('/')[-1]
+
+for subdir in os.listdir(dataDir):
+    if subdir not in ['Baseline-Treatment', 'Slip-duplicate']:
+        continue
+    treatment = Treatment(os.path.join(dataDir,subdir))
+    Treatments.append(treatment)
+
+    for run_dir in os.listdir(treatment.treatmentDir):
+        if not 'run_' in run_dir:
+            continue
+        treatment.runDirectories.append(os.path.join(treatment.treatmentDir,run_dir))
+
+
+for treatment in Treatments:
+        treatmentName = treatment.treatmentName
+        print(treatmentName)
+        
+        for runDir in treatment.runDirectories:
+            lineageFile = os.path.join(runDir, f"Timepoint_{updateToBeAnalyzed}/data/detail_MostNumLineageAt{updateToBeAnalyzed}.dat")
+
+            runDirElements = runDir.split('/')
+            runName = runDirElements[-1]
+
+            sequencePairs = getSequencePairsFromLineage(lineageFile)
+            print(sequencePairs)
+
+            for lineageGenerationIdx, sequence_pair in enumerate(sequencePairs):
+                lineageGenerationIdx = lineageGenerationIdx + 1
+
+                parentSequence = sequence_pair[0]
+                childSequence = sequence_pair[1]
+
+                mutationMasksDataframe = getMutationMasks(parentSequence,
+                                                        childSequence,
+                                                        [],
+                                                        [],
+                                                        [],
+                                                        treatment,
+                                                        runName,
+                                                        lineageGenerationIdx,
+                                                        lineageFile)
+
+                mutationMasksDataframe.to_csv(f"{experimentDir}/{experimentName}-{treatment}-{runName}-Timepoint{updateToBeAnalyzed}-{lineageGenerationIdx}-LineageMutationMasks.csv")
