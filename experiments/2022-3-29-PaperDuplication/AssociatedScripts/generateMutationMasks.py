@@ -238,6 +238,26 @@ for treatment in Treatments:
             sequencePairs = getSequencePairsFromLineage(lineageFile)
             print(sequencePairs)
 
+            #Spit out dataframe for the ancestor's origin
+            ancestor_sequence = "wzcagcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccczvfcaxgab"
+            mutationMasksDataframe = pd.DataFrame(
+                {
+                    "Site": range(100),
+                    "Treatment": treatment.treatmentName,
+                    "Run ID": runName,
+                    "Lineage Generation Index": 0,
+                    "Update Analyzed": updateToBeAnalyzed,
+                    "CHILD_SOURCE_MAP": [-1 for k in range(100)],
+                    "DELETION_MUTATION_BOOL_MASK": [False] * 100,
+                    "POINT_MUTATION_BOOL_MASK": [False] * 100,
+                    "SLIP_INSERTION_BOOL_MASK": [False] * 100,
+                    "SINGLE_INSERTION_BOOL_MASK": [False] * 100,
+                    "GENOME_CHARACTERS": [ancestor_sequence[k] for k in range(len(ancestor_sequence))]
+                }
+            )
+
+            mutationMasksDataframe.to_csv(f"{experimentDir}/{experimentName}-{treatment.treatmentName}-{runName}-Timepoint{updateToBeAnalyzed}-0-LineageMutationMasks.csv")
+
             for lineageGenerationIdx, sequence_pair in enumerate(sequencePairs):
                 lineageGenerationIdx = lineageGenerationIdx + 1
 
