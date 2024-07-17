@@ -290,3 +290,8 @@ def test_aaaaaStrangePhenomena():
     assert deletion_mutations == []
     assert insertion_mutations == []
     assert slip_insertion_mutations == [0, 1, 2, 3, 4, 5, 6, 7]
+
+def test_criscrossingRun_1609_OneSite_ManyChildren():
+    wzcagcccccccccccccccccccccccccccccocccccccccccccclcccccccccccccccccccccccccccdcccccccccccczvvfcaxgab
+    wzcagcccccccccccccccccccccccccccccocccccccccccccclcccccccccccccccccccccccccccdcccscccccccczvvfcaxgab
+    
