@@ -135,14 +135,38 @@ def getChildSourceMap(parent_sequence: str,
 
     deletion_mutations = [parent_index for parent_index in parent_indices if parent_index not in childSourceMap]
 
-    insertion_mutations = [k for k in range(len(childSourceMap)) if childSourceMap[k] == -1]
-
     slip_insertion_mutations = []
     
+    #This complicated series of if-statements is intended to ensure
+    #that only bonafide slip-insertions are reported as such, not
+    #allowing single insertions of the same instruction type as
+    #those they are surrounded by to be reported as slip-insertions
     for k, idx in enumerate(childSourceMap):
         if childSourceMap.count(idx) == 2:
             if idx != -1:
-                slip_insertion_mutations.append(k)
+                if k >= 1 and k < len(childSourceMap) - 1:
+                    if childSourceMap[k - 1] == idx:
+                        childSourceMap[k] = idx
+                        childSourceMap[k - 1] = -1
+                    elif childSourceMap[k + 1] == idx:
+                        childSourceMap[k] = -1
+                        childSourceMap[k + 1] = idx
+                    else:
+                        slip_insertion_mutations.append(k)
+                elif k == 0:
+                    if childSourceMap[k + 1] == idx:
+                        childSourceMap[k] = -1
+                        childSourceMap[k + 1] = idx
+                    else:
+                        slip_insertion_mutations.append(k)
+                elif k == len(childSourceMap):
+                    if childSourceMap[k - 1] == idx:
+                        childSourceMap[k] = idx
+                        childSourceMap[k - 1] = -1
+                    else:
+                        slip_insertion_mutations.append(k)
+
+    insertion_mutations = [k for k in range(len(childSourceMap)) if childSourceMap[k] == -1]
 
     point_mutations = []
     for child_index, child_value, source_index in zip(it.count(), child_sequence, childSourceMap):
