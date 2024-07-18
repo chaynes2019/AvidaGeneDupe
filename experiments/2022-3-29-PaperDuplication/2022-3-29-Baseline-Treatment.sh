@@ -21,7 +21,7 @@ OUTPUT_DIR=/scratch/zamanlh_root/zamanlh0/${USERNAME}/${EXPERIMENT_ID}/Baseline-
 CONFIG_DIR=/home/${USERNAME}/Documents/AvidaGeneDupe/experiments/${EXPERIMENT_ID}/hpcc/config
 
 SEED_OFFSET=1530
-SLURM_ARRAY_TASK_ID=0
+
 SEED=$((SEED_OFFSET + SLURM_ARRAY_TASK_ID - 1))
 
 JOB_ID=${SLURM_ARRAY_TASK_ID}
@@ -44,7 +44,7 @@ cp ${CONFIG_DIR}/analyze.cfg .
 
 EXECUTE="avida -s ${SEED} -set COPY_MUT_PROB 0.0025 -set COPY_INS_PROB 0.0 -set COPY_DEL_PROB 0.0 -set DIVIDE_INS_PROB 0.00 -set DIVIDE_DEL_PROB 0.00 -set DIVIDE_SLIP_PROB 0.0 -set SLIP_FILL_MODE 0 -set STERILIZE_UNSTABLE 1"
 echo ${EXECUTE} > cmd.log
-./${EXECUTE}
+./${EXECUTE} > run.log
 ./${EXECUTE} -a > analyze.log
 
 rm avida

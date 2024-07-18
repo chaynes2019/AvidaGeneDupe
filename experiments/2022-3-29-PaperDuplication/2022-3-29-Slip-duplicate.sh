@@ -21,7 +21,7 @@ OUTPUT_DIR=/scratch/zamanlh_root/zamanlh0/${USERNAME}/${EXPERIMENT_ID}/Slip-dupl
 CONFIG_DIR=/home/${USERNAME}/Documents/AvidaGeneDupe/experiments/${EXPERIMENT_ID}/hpcc/config
 
 SEED_OFFSET=1590
-SLURM_ARRAY_TASK_ID=0
+
 SEED=$((SEED_OFFSET + SLURM_ARRAY_TASK_ID - 1))
 
 JOB_ID=${SLURM_ARRAY_TASK_ID}
