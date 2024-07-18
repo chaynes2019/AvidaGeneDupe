@@ -292,6 +292,37 @@ def test_aaaaaStrangePhenomena():
     assert slip_insertion_mutations == [0, 1, 2, 3, 4, 5, 6, 7]
 
 def test_criscrossingRun_1609_OneSite_ManyChildren():
-    wzcagcccccccccccccccccccccccccccccocccccccccccccclcccccccccccccccccccccccccccdcccccccccccczvvfcaxgab
-    wzcagcccccccccccccccccccccccccccccocccccccccccccclcccccccccccccccccccccccccccdcccscccccccczvvfcaxgab
+    parentSequence = "wzcagcccccccccccccccccccccccccccccocccccccccccccclcccccccccccccccccccccccccccdcccccccccccczvvfcaxgab"
+    childSequence = "wzcagcccccccccccccccccccccccccccccocccccccccccccclcccccccccccccccccccccccccccdcccscccccccczvvfcaxgab"
+
+    alignmentList = aligner.align(parentSequence, childSequence)
+
+    childSourceMap, point_mutations, deletion_mutations, insertion_mutations, slip_insertion_mutations = getChildSourceMap(parentSequence, 
+                                                                                                                                      childSequence, 
+                                                                                                                                      alignmentList)
     
+    assert childSourceMap == [0, 1, 2, 3, 0, 1, 2, 3, 4, 5, 6, 7]
+    assert point_mutations == []
+    assert deletion_mutations == []
+    assert insertion_mutations == []
+    assert slip_insertion_mutations == [0, 1, 2, 3, 4, 5, 6, 7]
+
+def test_spacedDuplication():
+    parentSequence = "wzcagcclacccneccccccccncqccccccccutcccvccccccccccccefcccccccacccycccccccccncccccccccccqccccccmcucccccccccccccnccceccccccccacccycccccccacccycccccccccncccccccccccqccccccmcuccccccccccccccccceccccccccacccycccccccccccccccruccqccccccccycccccccccncccccccccccqccccccmcucccccccuccccccccceccccccccacccycccccccccccccccruccqccccccczvfcaxgab"
+    childSequence =  "wzcagcclacccneccccccccncqccccccccutcccvcccccccccckcefcccccccacccycccccccccncccccccccccqccccccmcucccccccccccccnccceccccccccacccycccccccacccycccccccccncccccccccccqccccccmcuccccccccccccccccceccccccccacccyccccccccccccccruccqccccccccycccccccccncccccccccccqccccycccccccccccccccruccqccccccccycccccccccncccccccccccqccccccmcucccccccuccccccccceccccccccacccycccccccccccccccruccqccccccczvfcaxgab"
+
+    alignmentList = aligner.align(parentSequence, childSequence)
+
+    childSourceMap, point_mutations, deletion_mutations, insertion_mutations, slip_insertion_mutations = getChildSourceMap(parentSequence, 
+                                                                                                                                      childSequence, 
+                                                                                                                                      alignmentList)
+    
+    expectedChildSourceMap = [k for k in range(214)] + [-1 for k in range(40)] + [k + 214 for k range()]
+    expectedChildSourceMap[49] = -1
+
+
+    assert childSourceMap == expectedChildSourceMap
+    assert point_mutations == [49]
+    assert deletion_mutations == []
+    assert insertion_mutations == []
+    assert slip_insertion_mutations == [0, 1, 2, 3, 4, 5, 6, 7]
