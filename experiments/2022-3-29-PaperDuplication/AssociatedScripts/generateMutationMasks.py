@@ -174,7 +174,6 @@ def getChildSourceMap(parent_sequence: str,
         #Remember: -1 is a valid source_index, but it will direct you
         #to the end of the parent sequence
         if parent_sequence[source_index] != child_value and source_index != -1:
-            childSourceMap[child_index] = -1
             point_mutations.append(child_index)
             
 
@@ -198,7 +197,6 @@ def getMutationMasks(parent_sequence: str,
         #Remember: -1 is a valid source_index, but it will direct you
         #to the end of the parent sequence
         if parent_sequence[source_index] != child_value and source_index != -1:
-            childSourceMap[child_index] = -1
             pointMutations.append(child_index)
     
     slipInsertionMutations = []
