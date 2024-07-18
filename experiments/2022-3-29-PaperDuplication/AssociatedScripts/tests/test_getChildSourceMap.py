@@ -317,12 +317,12 @@ def test_spacedDuplication():
                                                                                                                                       childSequence, 
                                                                                                                                       alignmentList)
     
-    expectedChildSourceMap = [k for k in range(214)] + [-1 for k in range(40)] + [k + 214 for k range()]
+    expectedChildSourceMap = [k for k in range(215)] + [-1 for k in range(37)] + [197 + k for k in range(131)]
     expectedChildSourceMap[49] = -1
 
 
     assert childSourceMap == expectedChildSourceMap
     assert point_mutations == [49]
     assert deletion_mutations == []
-    assert insertion_mutations == []
-    assert slip_insertion_mutations == [0, 1, 2, 3, 4, 5, 6, 7]
+    assert insertion_mutations == [215 + k for k in range(37)]
+    assert slip_insertion_mutations == [197 + k for k in range(18)] + [252 + k for k in range(18)]
