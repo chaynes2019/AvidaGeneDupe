@@ -46,14 +46,12 @@ def test_singleInsertionMutation():
                      [],
                      [4])
     
-    singleInsertionMask = [False] * len(child_genome)
-    singleInsertionMask[4] = True
 
     expectedResult = pd.DataFrame(
         {
             "Site": range(len(child_genome)),              
-            "CHILD_SOURCE_MAP": [0, 1, 2, 3, -1, 4, 5, 6, 7, 8],
-            "POINT_MUTATION_BOOL_MASK": [False] * len(child_genome),
+            "CHILD_SOURCE_MAP": [0, 1, 2, 3, 4, 5, 6, 7, 8],
+            "POINT_MUTATION_BOOL_MASK": [i == 4 for i in range(len(child_genome))],
             "SLIP_INSERTION_BOOL_MASK": [False] * len(child_genome),                
             "GENOME_CHARACTERS": [child_genome[k] for k in range(len(child_genome))],
         }
