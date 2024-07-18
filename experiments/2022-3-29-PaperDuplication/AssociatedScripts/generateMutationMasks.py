@@ -187,7 +187,7 @@ def getMutationMasks(parent_sequence: str,
                      treatment,
                      runName,
                      lineageGenerationIndex,
-                     lineageFile) -> pd.DataFrame:
+                     ) -> pd.DataFrame:
     
     
     childSourceMap = find_best_alignment(parent_sequence, child_sequence)
@@ -205,13 +205,14 @@ def getMutationMasks(parent_sequence: str,
             slipInsertionMutations.append(k)
     
     if len(slipInsertionMutations) % 2 == 0:
-        #first index of top half = halfwayPoint + 1
-        #Therefore, when items are 0-indexed and shifted
-        #down by 1, it becomes
-        #first index of top half = halfwayPoint
-
-        halfwayPoint = len(slipInsertionMutations) / 2
-        slipInsertionMutations = slipInsertionMutations[halfwayPoint:]
+        if len(slipInsertionMutations) > 0:
+            #first index of top half = halfwayPoint + 1
+            #Therefore, when items are 0-indexed and shifted
+            #down by 1, it becomes
+            #first index of top half = halfwayPoint
+            raise IndexError(f"The value of the len(slipInsertion) is {len(slipInsertionMutations)}")
+            halfwayPoint = len(slipInsertionMutations) / 2
+            slipInsertionMutations = slipInsertionMutations[halfwayPoint:]
     else:
         raise IndexError(f"The method for gathering slip insertion mutations has erred: {slipInsertionMutations}")
 
