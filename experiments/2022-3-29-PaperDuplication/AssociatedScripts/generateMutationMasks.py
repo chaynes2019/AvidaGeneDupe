@@ -4,6 +4,7 @@ import itertools as it
 from typing import List
 import os
 import sys
+from find_best_alignment import find_best_alignment
 
 def getAlignments():
     pass
@@ -189,14 +190,32 @@ def getMutationMasks(parent_sequence: str,
                      lineageGenerationIndex,
                      lineageFile) -> pd.DataFrame:
     
-    aligner = Align.PairwiseAligner()
-    aligner.open_gap_score = -0.25
-
-    alignments = aligner.align(parent_sequence, child_sequence)
     
-    childSourceMap, pointMutations, deletionMutations, insertionMutations, slipInsertionMutations = getChildSourceMap(parent_sequence, 
-                                                                                                                      child_sequence,
-                                                                                                                      alignments)
+    childSourceMap = find_best_alignment(parent_sequence, child_sequence)
+
+    pointMutations = []
+    for child_index, child_value, source_index in zip(it.count(), child_sequence, childSourceMap):
+        #Remember: -1 is a valid source_index, but it will direct you
+        #to the end of the parent sequence
+        if parent_sequence[source_index] != child_value and source_index != -1:
+            childSourceMap[child_index] = -1
+            pointMutations.append(child_index)
+    
+    slipInsertionMutations = []
+    for k, idx in enumerate(childSourceMap):
+        if childSourceMap.count(idx) == 2:
+            slipInsertionMutations.append(k)
+    
+    if len(slipInsertionMutations) % 2 == 0:
+        #first index of top half = halfwayPoint + 1
+        #Therefore, when items are 0-indexed and shifted
+        #down by 1, it becomes
+        #first index of top half = halfwayPoint
+
+        halfwayPoint = len(slipInsertionMutations) / 2
+        slipInsertionMutations = slipInsertionMutations[halfwayPoint:]
+    else:
+        raise IndexError(f"The method for gathering slip insertion mutations has erred: {slipInsertionMutations}")
 
     return pd.DataFrame(
         {
@@ -206,10 +225,8 @@ def getMutationMasks(parent_sequence: str,
             "Lineage Generation Index": lineageGenerationIndex,
             "Update Analyzed": updateToBeAnalyzed,
             "CHILD_SOURCE_MAP": childSourceMap,
-            "DELETION_MUTATION_BOOL_MASK": [i in deletionMutations for i in range(len(child_sequence))],
             "POINT_MUTATION_BOOL_MASK": [i in pointMutations for i in range(len(child_sequence))],
             "SLIP_INSERTION_BOOL_MASK": [i in slipInsertionMutations for i in range(len(child_sequence))],
-            "SINGLE_INSERTION_BOOL_MASK": [i in insertionMutations for i in range(len(child_sequence))],
             "GENOME_CHARACTERS": [child_sequence[k] for k in range(len(child_sequence))]
         }
     )
