@@ -4,6 +4,9 @@ import itertools as it
 from typing import List
 import os
 import sys
+
+sys.path.append('/home/clhaynes/Documents/AvidaGeneDupe/experiments/2022-3-29-PaperDuplication/AssociatedScripts')
+
 from find_best_alignment import find_best_alignment
 
 def getAlignments():
