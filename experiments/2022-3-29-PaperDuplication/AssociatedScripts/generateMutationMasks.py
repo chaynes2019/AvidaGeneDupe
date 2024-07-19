@@ -215,7 +215,7 @@ def getMutationMasks(parent_sequence: str,
             #first index of top half = halfwayPoint
             
             halfwayPoint = len(slipInsertionMutations) / 2
-            slipInsertionMutations = slipInsertionMutations[halfwayPoint:]
+            slipInsertionMutations = slipInsertionMutations[halfwayPoint::]
     else:
         raise IndexError(f"The method for gathering slip insertion mutations has erred: {slipInsertionMutations}")
 
