@@ -288,10 +288,8 @@ for treatment in Treatments:
                     "Lineage Generation Index": 0,
                     "Update Analyzed": updateToBeAnalyzed,
                     "CHILD_SOURCE_MAP": [-1 for k in range(100)],
-                    "DELETION_MUTATION_BOOL_MASK": [False] * 100,
                     "POINT_MUTATION_BOOL_MASK": [False] * 100,
                     "SLIP_INSERTION_BOOL_MASK": [False] * 100,
-                    "SINGLE_INSERTION_BOOL_MASK": [False] * 100,
                     "GENOME_CHARACTERS": [ancestor_sequence[k] for k in range(len(ancestor_sequence))]
                 }
             )
