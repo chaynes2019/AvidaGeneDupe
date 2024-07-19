@@ -213,7 +213,7 @@ def getMutationMasks(parent_sequence: str,
             #Therefore, when items are 0-indexed and shifted
             #down by 1, it becomes
             #first index of top half = halfwayPoint
-            raise IndexError(f"The value of the len(slipInsertion) is {len(slipInsertionMutations)}")
+            
             halfwayPoint = len(slipInsertionMutations) / 2
             slipInsertionMutations = slipInsertionMutations[halfwayPoint:]
     else:
