@@ -214,7 +214,7 @@ def getMutationMasks(parent_sequence: str,
             #down by 1, it becomes
             #first index of top half = halfwayPoint
             
-            halfwayPoint = len(slipInsertionMutations) / 2
+            halfwayPoint = len(slipInsertionMutations) // 2
             try:
                 slipInsertionMutations = slipInsertionMutations[halfwayPoint::]
             except TypeError as e:
