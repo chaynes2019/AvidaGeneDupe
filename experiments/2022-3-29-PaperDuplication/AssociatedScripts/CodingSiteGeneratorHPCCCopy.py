@@ -216,7 +216,7 @@ def executeInfoAnalysis(runDir):
     os.system('cp {}/environment.cfg .'.format(configDir))
     os.system('cp {}/events.cfg .'.format(configDir))
     os.system('cp {}/instset-heads___sensors_NONE.cfg .'.format(configDir))
-    os.system(f"./avida -set ANALYZE_FILE informationAnalyzer.cfg -a > analyze.log")
+    os.system(f"./avida -set ANALYZE_FILE informationAnalyzer.cfg -set STERILIZE_UNSTABLE 1 -a > analyze.log")
     os.system('rm avida')
     os.system('rm avida.cfg')
     os.system('rm default-heads.org')
