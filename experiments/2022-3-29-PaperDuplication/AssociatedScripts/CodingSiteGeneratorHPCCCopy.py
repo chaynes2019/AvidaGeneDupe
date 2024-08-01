@@ -333,8 +333,8 @@ def getAndWriteTaskCodingSites(treatment, runDir):
     '''
     for k in range(len(lineageDetailFiles)):
         orgKnockoutDataFile = lineageDetailFiles[k]
-        taskCodingSites, viabilitySites, numUniqueCodingSites = getTaskCodingSitesOverRun(orgKnockoutDataFile)
-        writeTaskCodingSitesInPandasDataFrame(treatment, k, runDir, taskCodingSites, viabilitySites, numUniqueCodingSites)
+        taskCodingSites, viabilitySites, numUniqueCodingSites, has_task = getTaskCodingSitesOverRun(orgKnockoutDataFile)
+        writeTaskCodingSitesInPandasDataFrame(treatment, k, runDir, taskCodingSites, viabilitySites, numUniqueCodingSites, has_task)
 
 def writeExperimentTaskCodingSites(treatmentArray):
     for treatment in treatmentArray:
