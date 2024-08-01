@@ -50,7 +50,8 @@ class Treatment():
         self.treatmentName = self.treatmentDir.split('/')[-1]
         self.treatmentDataframe = pd.DataFrame(columns = ["Run ID",
                                                           "Lineage Generation Index",
-                                                          "Task", 
+                                                          "Task",
+                                                          "Has Task", 
                                                           "Update Analyzed",
                                                           "Treatment",
                                                           "Task Coding Sites", 
@@ -242,6 +243,11 @@ def getTaskCodingSitesOverRun(knockoutDataFile):
 
     organismsTasks = getTasks(analyzedOrganism)
     
+    hasTask = [False for k in range(9)]
+    for k in range(9):
+        if organismsTasks[k] == 1:
+            hasTask[k] == True
+
     #codingSites is now a numpy array of boolean values; each row, col corresponds to task, genome site
     #and gives 1 if coding site, 0 if not
     codingSites = [[] for k in range(len(organismsTasks))]
@@ -274,9 +280,9 @@ def getTaskCodingSitesOverRun(knockoutDataFile):
 
     viabilitySites = sorted(list(viabilitySites))
 
-    return codingSites, viabilitySites, numCodingSites
+    return codingSites, viabilitySites, numCodingSites, hasTask
 
-def writeTaskCodingSitesInPandasDataFrame(treatment, lineageGenerationIndex, runDir, taskCodingSites, viabilitySites, numUniqueCodingSites):
+def writeTaskCodingSitesInPandasDataFrame(treatment, lineageGenerationIndex, runDir, taskCodingSites, viabilitySites, numUniqueCodingSites, hasTask):
     runDirElements = runDir.split('/')
     runName = runDirElements[-1]
 
@@ -306,7 +312,7 @@ def writeTaskCodingSitesInPandasDataFrame(treatment, lineageGenerationIndex, run
 
     for k in range(9):
         rowName = f"{runName}," + f"{lineageGenerationIndex}," + f"{taskNames[k]}"
-        treatment.treatmentDataframe.loc[rowName] = [runName, lineageGenerationIndex, taskNames[k], desiredUpdateToAnalyze, treatment.treatmentName, taskCodingSites[k], len(taskCodingSites[k]), numUniqueCodingSites, viabilitySites, len(viabilitySites), genomeLength, fracCodingSites, fracViabilitySites, viabilityToCodingRatio, getGenome(runDir, lineageGenerationIndex)]
+        treatment.treatmentDataframe.loc[rowName] = [runName, lineageGenerationIndex, taskNames[k], hasTask[k], desiredUpdateToAnalyze, treatment.treatmentName, taskCodingSites[k], len(taskCodingSites[k]), numUniqueCodingSites, viabilitySites, len(viabilitySites), genomeLength, fracCodingSites, fracViabilitySites, viabilityToCodingRatio, getGenome(runDir, lineageGenerationIndex)]
 
 def getAndWriteTaskCodingSites(treatment, runDir):
     dataDir = os.path.join(runDir, f"Timepoint_{desiredUpdateToAnalyze}/data")
