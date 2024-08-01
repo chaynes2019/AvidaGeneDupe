@@ -10,7 +10,7 @@ validTreatments = ["Baseline-Treatment", "Slip-duplicate", "Long-Ancestor-Contro
 
 treatmentParameters = {"Baseline-Treatment" : {"Seed Offset" : 1530, "Slip Mutation Probability" : 0.0, "Slip Fill Mode" : 0, "Event File" : "events.cfg"},
                        "Slip-duplicate" : {"Seed Offset" : 1590, "Slip Mutation Probability" : 0.05, "Slip Fill Mode" : 0, "Event File" : "events.cfg"},
-                       "Long-Ancestor-Control-Treatment" : {"Seed Offset" : 1740, "Slip Mutation Probability" : 0.0, "Slip Fill Mode" : 0, "Event File" : "eventsLongAncestralControl.cfg"}}
+                       "Long-Ancestor-Control-Treatment" : {"Seed Offset" : 1740, "Slip Mutation Probability" : 0.0, "Slip Fill Mode" : 0, "Event File" : "eventsLongAncestralOrganism.cfg"}}
 
 possibleTreatments = os.listdir(f'/scratch/zamanlh_root/zamanlh0/clhaynes/{experimentID}')
 
