@@ -42,7 +42,7 @@ cp ${CONFIG_DIR}/eventsLongAncestralOrganism.cfg .
 cp ${CONFIG_DIR}/instset-heads___sensors_NONE.cfg .
 cp ${CONFIG_DIR}/analyze.cfg .
 
-EXECUTE="avida -s ${SEED} -set COPY_MUT_PROB 0.0025 -set COPY_INS_PROB 0.0 -set COPY_DEL_PROB 0.0 -set DIVIDE_INS_PROB 0.00 -set DIVIDE_DEL_PROB 0.00 -set DIVIDE_SLIP_PROB 0.0 -set SLIP_FILL_MODE 0 -set EVENT_FILE eventsLongAncestralOrganism.org -set STERILIZE_UNSTABLE 1"
+EXECUTE="avida -s ${SEED} -set COPY_MUT_PROB 0.0025 -set COPY_INS_PROB 0.0 -set COPY_DEL_PROB 0.0 -set DIVIDE_INS_PROB 0.00 -set DIVIDE_DEL_PROB 0.00 -set DIVIDE_SLIP_PROB 0.0 -set SLIP_FILL_MODE 0 -set EVENT_FILE eventsLongAncestralOrganism.cfg -set STERILIZE_UNSTABLE 1"
 echo ${EXECUTE} > cmd.log
 ./${EXECUTE} > run.log
 ./${EXECUTE} -a > analyze.log
