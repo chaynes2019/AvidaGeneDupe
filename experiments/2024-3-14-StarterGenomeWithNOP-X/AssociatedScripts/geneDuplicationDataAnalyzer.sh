@@ -21,8 +21,6 @@ do
     echo ${iter}
     SEED=$((${iter} + ${SEED_OFFSET}))
 
-    
-
     RUN_DIR=${OUTPUT_DIR}/run_${SEED}
 
     cd ${RUN_DIR}
