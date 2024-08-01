@@ -37,7 +37,7 @@ do
     cp $${CONFIG_DIR}/avida.cfg .
     cp $${CONFIG_DIR}/default-heads.org .
     cp $${CONFIG_DIR}/environment.cfg .
-    cp $${CONFIG_DIR}/events.cfg .
+    cp $${CONFIG_DIR}/$eventFile .
     cp $${CONFIG_DIR}/instset-heads___sensors_NONE.cfg .
     cp $${CONFIG_DIR}/analyze_$${ANALYSIS_TIME}.cfg .
 
@@ -48,7 +48,7 @@ do
     rm avida.cfg
     rm default-heads.org
     rm environment.cfg
-    rm events.cfg
+    rm $eventFile
     rm instset-heads___sensors_NONE.cfg
     rm analyze.cfg
 
