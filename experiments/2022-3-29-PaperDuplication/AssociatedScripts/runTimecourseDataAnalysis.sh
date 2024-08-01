@@ -6,7 +6,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --mem=2g
-#SBATCH --time=00-04:00:00
+#SBATCH --time=00-12:00:00
 #SBATCH --account=zamanlh0
 #SBATCH --array=50
 
