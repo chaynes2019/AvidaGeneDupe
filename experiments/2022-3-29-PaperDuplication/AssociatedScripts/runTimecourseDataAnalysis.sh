@@ -8,7 +8,7 @@
 #SBATCH --mem=2g
 #SBATCH --time=00-04:00:00
 #SBATCH --account=zamanlh0
-#SBATCH --array=1-50
+#SBATCH --array=50
 
 USERNAME=clhaynes
 EXPERIMENT_ID=2022-3-29-PaperDuplication
@@ -16,7 +16,7 @@ EXPERIMENT_ID=2022-3-29-PaperDuplication
 EXPERIMENT_DIR=/scratch/zamanlh_root/zamanlh0/${USERNAME}/${EXPERIMENT_ID}
 
 echo "Experiment: ${EXPERIMENT_ID}"
-SLURM_ARRAY_TASK_ID=50
+
 ANALYSIS_TIME=$((1000 * SLURM_ARRAY_TASK_ID))
 echo $ANALYSIS_TIME
 
