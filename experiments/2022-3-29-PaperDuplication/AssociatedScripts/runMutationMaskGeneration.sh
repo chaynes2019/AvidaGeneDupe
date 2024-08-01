@@ -28,4 +28,4 @@ python3 generateMutationMasks_${ANALYSIS_TIME}.py ${ANALYSIS_TIME}
 
 rm generateMutationMasks_${ANALYSIS_TIME}.py
 
-find 2022-3-29-PaperDuplication-*-LineageMutationMasks.csv | python3 -m joinem 2022-3-29-PaperDuplication-${ANALYSIS_TIME}-CollatedLineageMutationMasks.csv --progress
+find 2022-3-29-PaperDuplication-*-LineageMutationMasks.csv | python3 -m joinem 2022-3-29-PaperDuplication-Timepoint${ANALYSIS_TIME}-CollatedLineageMutationMasks.csv --progress
