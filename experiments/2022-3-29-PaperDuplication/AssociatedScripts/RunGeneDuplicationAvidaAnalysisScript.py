@@ -6,10 +6,11 @@ numberOfReplicates = 30
 experimentID = sys.argv[1]
 updateToAnalyze = sys.argv[2]
 
-validTreatments = ["Baseline-Treatment", "Slip-duplicate"]
+validTreatments = ["Baseline-Treatment", "Slip-duplicate", "Long-Ancestor-Control-Treatment"]
 
-treatmentParameters = {"Baseline-Treatment" : {"Seed Offset" : 1530, "Slip Mutation Probability" : 0.0, "Slip Fill Mode" : 0},
-                       "Slip-duplicate" : {"Seed Offset" : 1590, "Slip Mutation Probability" : 0.05, "Slip Fill Mode" : 0}}
+treatmentParameters = {"Baseline-Treatment" : {"Seed Offset" : 1530, "Slip Mutation Probability" : 0.0, "Slip Fill Mode" : 0, "Event File" : "events.cfg"},
+                       "Slip-duplicate" : {"Seed Offset" : 1590, "Slip Mutation Probability" : 0.05, "Slip Fill Mode" : 0, "Event File" : "events.cfg"},
+                       "Long-Ancestor-Control-Treatment" : {"Seed Offset" : 1740, "Slip Mutation Probability" : 0.0, "Slip Fill Mode" : 0, "Event File" : "eventsLongAncestralControl.cfg"}}
 
 possibleTreatments = os.listdir(f'/scratch/zamanlh_root/zamanlh0/clhaynes/{experimentID}')
 
@@ -30,6 +31,7 @@ for treatmentInQuestion in possibleTreatments:
                                                                         seedOffset=parameters["Seed Offset"],
                                                                         divSlipProb=parameters["Slip Mutation Probability"],
                                                                         slipFillMode=parameters["Slip Fill Mode"],
+                                                                        eventFile=parameters["Event File"],
                                                                         experimentalID=experimentID)
 
         with open(f'geneDuplicationDataAnalyzer_{updateToAnalyze}.sh', 'w') as f:
