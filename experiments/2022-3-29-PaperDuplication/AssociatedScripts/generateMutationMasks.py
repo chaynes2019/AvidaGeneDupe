@@ -207,6 +207,9 @@ def getMutationMasks(parent_sequence: str,
         if childSourceMap.count(idx) == 2:
             slipInsertionMutations.append(k)
     
+    slipInsertionOriginMutations = []
+    slipInsertionResultMutations = []
+
     if len(slipInsertionMutations) % 2 == 0:
         if len(slipInsertionMutations) > 0:
             #first index of top half = halfwayPoint + 1
@@ -216,7 +219,8 @@ def getMutationMasks(parent_sequence: str,
             
             halfwayPoint = len(slipInsertionMutations) // 2
             try:
-                slipInsertionMutations = slipInsertionMutations[halfwayPoint::]
+                slipInsertionOriginMutations = slipInsertionMutations[::halfwayPoint]
+                slipInsertionResultMutations = slipInsertionMutations[halfwayPoint::]
             except TypeError as e:
                 raise TypeError(f"The slice index was of a wrong type; the index was {halfwayPoint}") from e
     else:
@@ -231,7 +235,8 @@ def getMutationMasks(parent_sequence: str,
             "Update Analyzed": updateToBeAnalyzed,
             "CHILD_SOURCE_MAP": childSourceMap,
             "POINT_MUTATION_BOOL_MASK": [i in pointMutations for i in range(len(child_sequence))],
-            "SLIP_INSERTION_BOOL_MASK": [i in slipInsertionMutations for i in range(len(child_sequence))],
+            "SLIP_INSERTION_ORIGIN_BOOL_MASK" : [i in slipInsertionOriginMutations for i in range(len(child_sequence))],
+            "SLIP_INSERTION_RESULT_BOOL_MASK": [i in slipInsertionResultMutations for i in range(len(child_sequence))],
             "GENOME_CHARACTERS": [child_sequence[k] for k in range(len(child_sequence))]
         }
     )
@@ -295,7 +300,8 @@ for treatment in Treatments:
                     "Update Analyzed": updateToBeAnalyzed,
                     "CHILD_SOURCE_MAP": [-1 for k in range(100)],
                     "POINT_MUTATION_BOOL_MASK": [False] * 100,
-                    "SLIP_INSERTION_BOOL_MASK": [False] * 100,
+                    "SLIP_INSERTION_ORIGIN_BOOL MASK" : [False] * 100,
+                    "SLIP_INSERTION_RESULT_BOOL_MASK": [False] * 100,
                     "GENOME_CHARACTERS": [ancestor_sequence[k] for k in range(len(ancestor_sequence))]
                 }
             )

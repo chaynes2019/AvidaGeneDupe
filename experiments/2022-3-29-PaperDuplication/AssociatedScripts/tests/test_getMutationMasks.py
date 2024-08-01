@@ -43,7 +43,8 @@ def test_singlePointMutation():
             "Update Analyzed": updateToBeAnalyzed,
             "CHILD_SOURCE_MAP": childSourceMap,
             "POINT_MUTATION_BOOL_MASK": [i == 53 for i in range(len(child_genome))],
-            "SLIP_INSERTION_BOOL_MASK": [False] * len(parent_genome),
+            "SLIP_INSERTION_ORIGIN_BOOL_MASK": [False] * len(parent_genome),
+            "SLIP_INSERTION_RESULT_BOOL_MASK": [False] * len(parent_genome),
             "GENOME_CHARACTERS": [child_genome[k] for k in range(len(child_genome))]
         }
     )
@@ -77,7 +78,8 @@ def test_singleInsertionMutation():
             "Update Analyzed": updateToBeAnalyzed,              
             "CHILD_SOURCE_MAP": [0, 1, 2, 3, 4, 5, 6, 7, 8],
             "POINT_MUTATION_BOOL_MASK": [i == 4 for i in range(len(child_genome))],
-            "SLIP_INSERTION_BOOL_MASK": [False] * len(child_genome),                
+            "SLIP_INSERTION_ORIGIN_BOOL_MASK": [False] * len(child_genome),
+            "SLIP_INSERTION_RESULT_BOOL_MASK": [False] * len(child_genome),                
             "GENOME_CHARACTERS": [child_genome[k] for k in range(len(child_genome))],
         }
     )
