@@ -300,7 +300,7 @@ for treatment in Treatments:
                     "Update Analyzed": updateToBeAnalyzed,
                     "CHILD_SOURCE_MAP": [-1 for k in range(100)],
                     "POINT_MUTATION_BOOL_MASK": [False] * 100,
-                    "SLIP_INSERTION_ORIGIN_BOOL MASK" : [False] * 100,
+                    "SLIP_INSERTION_ORIGIN_BOOL_MASK" : [False] * 100,
                     "SLIP_INSERTION_RESULT_BOOL_MASK": [False] * 100,
                     "GENOME_CHARACTERS": [ancestor_sequence[k] for k in range(len(ancestor_sequence))]
                 }
