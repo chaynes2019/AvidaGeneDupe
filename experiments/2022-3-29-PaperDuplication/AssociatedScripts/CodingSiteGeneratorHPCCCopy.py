@@ -246,7 +246,7 @@ def getTaskCodingSitesOverRun(knockoutDataFile):
     hasTask = [False for k in range(9)]
     for k in range(9):
         if organismsTasks[k] == 1:
-            hasTask[k] == True
+            hasTask[k] = True
 
     #codingSites is now a numpy array of boolean values; each row, col corresponds to task, genome site
     #and gives 1 if coding site, 0 if not
