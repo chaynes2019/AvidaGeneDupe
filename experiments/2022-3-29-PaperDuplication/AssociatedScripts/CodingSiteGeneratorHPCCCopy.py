@@ -18,7 +18,6 @@ proceeds to iterate through those directories and apply the same analysis to eac
 
 
 import os
-import csv
 import numpy as np
 import pandas as pd
 import sys
@@ -50,6 +49,7 @@ class Treatment():
         self.treatmentName = self.treatmentDir.split('/')[-1]
         self.treatmentDataframe = pd.DataFrame(columns = ["Run ID",
                                                           "Lineage Generation Index",
+                                                          "Update Born",
                                                           "Task",
                                                           "Has Task", 
                                                           "Update Analyzed",
@@ -80,7 +80,7 @@ for subdir in os.listdir(dataDir):
     Treatments.append(treatment)
 
     for run_dir in os.listdir(treatment.treatmentDir):
-        if not 'run_' in run_dir:
+        if 'run_' not in run_dir:
             continue
         treatment.runDirectories.append(os.path.join(treatment.treatmentDir,run_dir))
 
@@ -88,7 +88,6 @@ for subdir in os.listdir(dataDir):
 def getOrganisms(filePath):
     with open(filePath,'r') as datFile:
         lines = datFile.readlines()
-        initalOrgPos = 0
         for k,line in enumerate(lines):
             if (line[0] != '') & (line[0] != '#') & (line[0] != '\n'):
                 initialOrgPos = k
@@ -123,8 +122,12 @@ def getOrganismID(organismString):
     ID = analyzeOutputs[0]
     return ID
 
-def getUpdateBorn(organismString):
-    analyzeOutputs = organismString.split()
+def getUpdateBorn(runDir, lineageGenerationIndex):
+    replicateData = os.path.join(runDir, f'Timepoint_{desiredUpdateToAnalyze}/data/detail_MostNumLineageAt{desiredUpdateToAnalyze}.dat')
+    datFileContents = getOrganisms(replicateData)
+    analyzedOrganism = datFileContents[lineageGenerationIndex]
+
+    analyzeOutputs = analyzedOrganism.split()
     updateBorn = analyzeOutputs[1]
     return updateBorn
 
@@ -161,7 +164,7 @@ def knockoutDatGenome(dest,genome,orgCount):
     for instructionIndex,inst in enumerate(genome):
         knuckOutGenome = knockItOut(genome,instructionIndex)
         knuckOutGenomes.append('LOAD_SEQUENCE ' + knuckOutGenome + '\n')
-    writeFile = dest
+    
     knuckOutGenomes.append('LOAD_SEQUENCE ' + genome + '\n')
     dest.write('SET_BATCH {} \n\n'.format(orgCount))
     dest.writelines(knuckOutGenomes)
@@ -217,7 +220,7 @@ def executeInfoAnalysis(runDir):
     os.system('cp {}/environment.cfg .'.format(configDir))
     os.system('cp {}/events.cfg .'.format(configDir))
     os.system('cp {}/instset-heads___sensors_NONE.cfg .'.format(configDir))
-    os.system(f"./avida -set ANALYZE_FILE informationAnalyzer.cfg -set STERILIZE_UNSTABLE 1 -a > analyze.log")
+    os.system("./avida -set ANALYZE_FILE informationAnalyzer.cfg -set STERILIZE_UNSTABLE 1 -a > analyze.log")
     os.system('rm avida')
     os.system('rm avida.cfg')
     os.system('rm default-heads.org')
@@ -297,6 +300,7 @@ def writeTaskCodingSitesInPandasDataFrame(treatment, lineageGenerationIndex, run
                  "EQUALS"]
 
     #print(f"Lineage Generation Index = {lineageGenerationIndex}")
+    updateBorn = getUpdateBorn(runDir, lineageGenerationIndex)
     genomeLength = getLength(runDir, lineageGenerationIndex)
     #print(f"Genome Length = {genomeLength}")
     #genome = getGenome(runDir, lineageGenerationIndex)
@@ -312,7 +316,7 @@ def writeTaskCodingSitesInPandasDataFrame(treatment, lineageGenerationIndex, run
 
     for k in range(9):
         rowName = f"{runName}," + f"{lineageGenerationIndex}," + f"{taskNames[k]}"
-        treatment.treatmentDataframe.loc[rowName] = [runName, lineageGenerationIndex, taskNames[k], hasTask[k], desiredUpdateToAnalyze, treatment.treatmentName, taskCodingSites[k], len(taskCodingSites[k]), numUniqueCodingSites, viabilitySites, len(viabilitySites), genomeLength, fracCodingSites, fracViabilitySites, viabilityToCodingRatio, getGenome(runDir, lineageGenerationIndex)]
+        treatment.treatmentDataframe.loc[rowName] = [runName, lineageGenerationIndex, updateBorn, taskNames[k], hasTask[k], desiredUpdateToAnalyze, treatment.treatmentName, taskCodingSites[k], len(taskCodingSites[k]), numUniqueCodingSites, viabilitySites, len(viabilitySites), genomeLength, fracCodingSites, fracViabilitySites, viabilityToCodingRatio, getGenome(runDir, lineageGenerationIndex)]
 
 def getAndWriteTaskCodingSites(treatment, runDir):
     dataDir = os.path.join(runDir, f"Timepoint_{desiredUpdateToAnalyze}/data")
@@ -345,7 +349,7 @@ def writeExperimentTaskCodingSites(treatmentArray):
             createDatAnalyzeCfg(runDir)
             executeInfoAnalysis(runDir)
             
-        treatmentData = []
+        
         for runDir in treatment.runDirectories:
             getAndWriteTaskCodingSites(treatment, runDir)
             os.chdir(runDir)
