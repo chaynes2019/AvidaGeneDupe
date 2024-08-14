@@ -50,6 +50,8 @@ class Treatment():
         self.treatmentDataframe = pd.DataFrame(columns = ["Run ID",
                                                           "Lineage Generation Index",
                                                           "Update Born",
+                                                          "Parent Distance",
+                                                          "Depth",
                                                           "Task",
                                                           "Has Task", 
                                                           "Update Analyzed",
@@ -319,6 +321,8 @@ def writeTaskCodingSitesInPandasDataFrame(treatment, lineageGenerationIndex, run
 
     #print(f"Lineage Generation Index = {lineageGenerationIndex}")
     updateBorn = getUpdateBorn(runDir, lineageGenerationIndex)
+    parentDistance = getParentDistance(runDir, lineageGenerationIndex)
+    depth = getDepth(runDir, lineageGenerationIndex)
     genomeLength = getLength(runDir, lineageGenerationIndex)
     #print(f"Genome Length = {genomeLength}")
     #genome = getGenome(runDir, lineageGenerationIndex)
@@ -334,7 +338,7 @@ def writeTaskCodingSitesInPandasDataFrame(treatment, lineageGenerationIndex, run
 
     for k in range(9):
         rowName = f"{runName}," + f"{lineageGenerationIndex}," + f"{taskNames[k]}"
-        treatment.treatmentDataframe.loc[rowName] = [runName, lineageGenerationIndex, updateBorn, taskNames[k], hasTask[k], desiredUpdateToAnalyze, treatment.treatmentName, taskCodingSites[k], len(taskCodingSites[k]), numUniqueCodingSites, viabilitySites, len(viabilitySites), genomeLength, fracCodingSites, fracViabilitySites, viabilityToCodingRatio, getGenome(runDir, lineageGenerationIndex)]
+        treatment.treatmentDataframe.loc[rowName] = [runName, lineageGenerationIndex, updateBorn, parentDistance, depth, taskNames[k], hasTask[k], desiredUpdateToAnalyze, treatment.treatmentName, taskCodingSites[k], len(taskCodingSites[k]), numUniqueCodingSites, viabilitySites, len(viabilitySites), genomeLength, fracCodingSites, fracViabilitySites, viabilityToCodingRatio, getGenome(runDir, lineageGenerationIndex)]
 
 def getAndWriteTaskCodingSites(treatment, runDir):
     dataDir = os.path.join(runDir, f"Timepoint_{desiredUpdateToAnalyze}/data")
