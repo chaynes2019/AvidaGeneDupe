@@ -131,6 +131,24 @@ def getUpdateBorn(runDir, lineageGenerationIndex):
     updateBorn = analyzeOutputs[1]
     return updateBorn
 
+def getParentDistance(runDir, lineageGenerationIndex):
+    replicateData = os.path.join(runDir, f'Timepoint_{desiredUpdateToAnalyze}/data/detail_MostNumLineageAt{desiredUpdateToAnalyze}.dat')
+    datFileContents = getOrganisms(replicateData)
+    analyzedOrganism = datFileContents[lineageGenerationIndex]
+
+    analyzeOutputs = analyzedOrganism.split()
+    depth = analyzeOutputs[2]
+    return depth
+
+def getDepth(runDir, lineageGenerationIndex):
+    replicateData = os.path.join(runDir, f'Timepoint_{desiredUpdateToAnalyze}/data/detail_MostNumLineageAt{desiredUpdateToAnalyze}.dat')
+    datFileContents = getOrganisms(replicateData)
+    analyzedOrganism = datFileContents[lineageGenerationIndex]
+
+    analyzeOutputs = analyzedOrganism.split()
+    depth = analyzeOutputs[3]
+    return depth
+
 def getLength(runDir, lineageGenerationIndex):
     replicateData = os.path.join(runDir, f'Timepoint_{desiredUpdateToAnalyze}/data/detail_MostNumLineageAt{desiredUpdateToAnalyze}.dat')
     datFileContents = getOrganisms(replicateData)
