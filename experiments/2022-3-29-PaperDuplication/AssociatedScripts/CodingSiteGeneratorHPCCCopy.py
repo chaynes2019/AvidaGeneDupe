@@ -51,6 +51,7 @@ class Treatment():
                                                           "Lineage Generation Index",
                                                           "Organism ID",
                                                           "Update Born",
+                                                          "Generation Born",
                                                           "Parent Distance",
                                                           "Depth",
                                                           "Task",
@@ -310,7 +311,45 @@ def getTaskCodingSitesOverRun(knockoutDataFile):
 
     return codingSites, viabilitySites, numCodingSites, hasTask
 
-def writeTaskCodingSitesInPandasDataFrame(treatment, lineageGenerationIndex, runDir, taskCodingSites, viabilitySites, numUniqueCodingSites, hasTask):
+def getGenerationBornData(runDir):
+    dataDirectory = os.path.join(runDir, f"Timepoint_{desiredUpdateToAnalyze}/data")
+    organismsInLineage = getOrganisms(
+        os.path.join(dataDirectory, f"detail_MostNumLineageAt{desiredUpdateToAnalyze}.dat")
+    )
+
+    idList = []
+
+    for k, org in enumerate(organismsInLineage):
+        idList.append(
+            int(org.split()[0])
+            )
+    
+    organismsInSpop = getOrganisms(
+        os.path.join(runDir, f"data/detail-{desiredUpdateToAnalyze}.spop")
+    )
+
+    organismsFromSpop = []
+    for org in organismsInSpop:
+        id = int(org.split()[0])
+        if id in idList:
+            organismsFromSpop.append(org)
+
+    organismsFromSpop = natsorted(organismsFromSpop)
+    
+    generationBornData = []
+    for k, org in enumerate(organismsFromSpop):
+        generationBorn = int(org.split()[10])
+        generationBornData.append(generationBorn)
+
+    return generationBornData
+
+def writeTaskCodingSitesInPandasDataFrame(treatment,
+                                          lineageGenerationIndex,
+                                          runDir, taskCodingSites,
+                                          viabilitySites,
+                                          numUniqueCodingSites,
+                                          hasTask,
+                                          generationBornData):
     runDirElements = runDir.split('/')
     runName = runDirElements[-1]
 
@@ -327,6 +366,7 @@ def writeTaskCodingSitesInPandasDataFrame(treatment, lineageGenerationIndex, run
     #print(f"Lineage Generation Index = {lineageGenerationIndex}")
     id = getOrganismID(runDir, lineageGenerationIndex)
     updateBorn = getUpdateBorn(runDir, lineageGenerationIndex)
+    generationBorn = generationBornData[lineageGenerationIndex]
     parentDistance = getParentDistance(runDir, lineageGenerationIndex)
     depth = getDepth(runDir, lineageGenerationIndex)
     genomeLength = getLength(runDir, lineageGenerationIndex)
@@ -344,7 +384,7 @@ def writeTaskCodingSitesInPandasDataFrame(treatment, lineageGenerationIndex, run
 
     for k in range(9):
         rowName = f"{runName}," + f"{lineageGenerationIndex}," + f"{taskNames[k]}"
-        treatment.treatmentDataframe.loc[rowName] = [runName, lineageGenerationIndex, id, updateBorn, parentDistance, depth, taskNames[k], hasTask[k], desiredUpdateToAnalyze, treatment.treatmentName, taskCodingSites[k], len(taskCodingSites[k]), numUniqueCodingSites, viabilitySites, len(viabilitySites), genomeLength, fracCodingSites, fracViabilitySites, viabilityToCodingRatio, getGenome(runDir, lineageGenerationIndex)]
+        treatment.treatmentDataframe.loc[rowName] = [runName, lineageGenerationIndex, id, updateBorn, generationBorn, parentDistance, depth, taskNames[k], hasTask[k], desiredUpdateToAnalyze, treatment.treatmentName, taskCodingSites[k], len(taskCodingSites[k]), numUniqueCodingSites, viabilitySites, len(viabilitySites), genomeLength, fracCodingSites, fracViabilitySites, viabilityToCodingRatio, getGenome(runDir, lineageGenerationIndex)]
 
 def getAndWriteTaskCodingSites(treatment, runDir):
     dataDir = os.path.join(runDir, f"Timepoint_{desiredUpdateToAnalyze}/data")
@@ -352,6 +392,8 @@ def getAndWriteTaskCodingSites(treatment, runDir):
     #analyze output files in the data subdirectory for the timepoint
     lineageDetailFiles = [os.path.join(dataDir, fileName) for fileName in os.listdir(dataDir) if "FitnessDifferences.dat" in fileName]
 
+    generationBornData = getGenerationBornData(runDir)
+    
     '''
     Sort the lineage detail files list by number, allowing the program to write the
     coding sites, et cetera, to the Pandas dataframe in the correct order
@@ -366,7 +408,7 @@ def getAndWriteTaskCodingSites(treatment, runDir):
     for k in range(len(lineageDetailFiles)):
         orgKnockoutDataFile = lineageDetailFiles[k]
         taskCodingSites, viabilitySites, numUniqueCodingSites, has_task = getTaskCodingSitesOverRun(orgKnockoutDataFile)
-        writeTaskCodingSitesInPandasDataFrame(treatment, k, runDir, taskCodingSites, viabilitySites, numUniqueCodingSites, has_task)
+        writeTaskCodingSitesInPandasDataFrame(treatment, k, runDir, taskCodingSites, viabilitySites, numUniqueCodingSites, has_task, generationBornData)
 
 def writeExperimentTaskCodingSites(treatmentArray):
     for treatment in treatmentArray:
@@ -388,7 +430,6 @@ linDatFile = ".dat"
 writeExperimentTaskCodingSites(Treatments)
 
 counter = 0
-
 for treatment in Treatments:
     print(treatment.treatmentDataframe)
     treatment.treatmentDataframe["Run UUID"] = uuid.uuid4()
