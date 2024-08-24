@@ -16,7 +16,7 @@ EXPERIMENT_ID=2024-08-24-PaperDuplicationWithPoissonPointMutation
 EXPERIMENT_DIR=/scratch/zamanlh_root/zamanlh0/${USERNAME}/${EXPERIMENT_ID}
 
 echo "Experiment: ${EXPERIMENT_ID}"
-SLURM_ARRAY_TASK_ID=1
+
 ANALYSIS_TIME=$((1000 * SLURM_ARRAY_TASK_ID))
 echo $ANALYSIS_TIME
 
