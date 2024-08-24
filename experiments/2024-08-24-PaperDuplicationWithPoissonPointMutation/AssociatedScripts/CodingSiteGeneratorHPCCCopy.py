@@ -76,7 +76,7 @@ Once all the run directories have been collated, the
 '''
 
 for subdir in os.listdir(dataDir):
-    if subdir not in ["Baseline-Treatment", "Slip-duplicate", "Long-Ancestor-Control-Treatment"]:
+    if subdir not in ["Slip+", "Slip-", "Slip-_Long"]:
         continue
     treatment = Treatment(os.path.join(dataDir,subdir))
     Treatments.append(treatment)
