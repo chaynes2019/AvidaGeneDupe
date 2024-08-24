@@ -41,7 +41,7 @@ cp ${CONFIG_DIR}/events.cfg .
 cp ${CONFIG_DIR}/instset-heads___sensors_NONE.cfg .
 cp ${CONFIG_DIR}/analyze.cfg .
 
-EXECUTE="avida -s ${SEED} -set COPY_MUT_PROB 0.0025 -set COPY_INS_PROB 0.0 -set COPY_DEL_PROB 0.0 -set DIVIDE_INS_PROB 0.05 -set DIVIDE_DEL_PROB 0.05 -set DIVIDE_SLIP_PROB 0.05 -set SLIP_FILL_MODE 0"
+EXECUTE="avida -s ${SEED} -set COPY_MUT_PROB 0.0 -set DIVIDE_POISSON_MUT_MEAN 0.25 -set COPY_INS_PROB 0.0 -set COPY_DEL_PROB 0.0 -set DIVIDE_INS_PROB 0.05 -set DIVIDE_DEL_PROB 0.05 -set DIVIDE_SLIP_PROB 0.05 -set SLIP_FILL_MODE 0"
 echo ${EXECUTE} > cmd.log
 ./${EXECUTE} > run.log
 ./${EXECUTE} -a > analyze.log
