@@ -1,7 +1,7 @@
 #!/bin/bash
 # The interpreter used to execute the script
 
-#SBATCH --job-name=AvidaGeneDupeFullRep_Slip-duplicate
+#SBATCH --job-name=AvidaGeneDupePoissonPointMutation_Slip+
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=clhaynes@umich.edu
 #SBATCH --nodes=1
@@ -15,12 +15,12 @@
 module load gcc/11.2.0
 
 USERNAME=clhaynes
-EXPERIMENT_ID=2022-3-29-PaperDuplication
+EXPERIMENT_ID=2024-08-24-PaperDuplicationWithPoissonPointMutation
 
-OUTPUT_DIR=/scratch/zamanlh_root/zamanlh0/${USERNAME}/${EXPERIMENT_ID}/Slip-duplicate
+OUTPUT_DIR=/scratch/zamanlh_root/zamanlh0/${USERNAME}/${EXPERIMENT_ID}/Slip+
 CONFIG_DIR=/home/${USERNAME}/Documents/AvidaGeneDupe/experiments/${EXPERIMENT_ID}/hpcc/config
 
-SEED_OFFSET=1590
+SEED_OFFSET=1830
 SEED=$((SEED_OFFSET + SLURM_ARRAY_TASK_ID - 1))
 
 JOB_ID=${SLURM_ARRAY_TASK_ID}
