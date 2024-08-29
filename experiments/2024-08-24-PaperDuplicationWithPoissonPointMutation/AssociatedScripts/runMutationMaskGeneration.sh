@@ -1,6 +1,6 @@
 #!/bin/bash
 # The interpreter used to execute the script
-#SBATCH --job-name=PaperDuplication-mutationMaskGeneration
+#SBATCH --job-name=PaperDuplicationWithPoissonPointMutation-mutationMaskGeneration
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=clhaynes@umich.edu
 #SBATCH --nodes=1
