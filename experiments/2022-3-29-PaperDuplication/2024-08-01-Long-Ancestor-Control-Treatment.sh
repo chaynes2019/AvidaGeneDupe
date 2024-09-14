@@ -1,7 +1,7 @@
 #!/bin/bash
 # The interpreter used to execute the script
 
-#SBATCH --job-name=AvidaGeneDupeFullRep_Baseline-Treatment
+#SBATCH --job-name=AvidaGeneDupeFullRep_LongAncestorGenomeControl
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --mail-user=clhaynes@umich.edu
 #SBATCH --nodes=1
@@ -17,10 +17,10 @@ module load gcc/11.2.0
 USERNAME=clhaynes
 EXPERIMENT_ID=2022-3-29-PaperDuplication
 
-OUTPUT_DIR=/scratch/zamanlh_root/zamanlh0/${USERNAME}/${EXPERIMENT_ID}/Baseline-Treatment
+OUTPUT_DIR=/scratch/zamanlh_root/zamanlh0/${USERNAME}/${EXPERIMENT_ID}/Long-Ancestor-Control-Treatment
 CONFIG_DIR=/home/${USERNAME}/Documents/AvidaGeneDupe/experiments/${EXPERIMENT_ID}/hpcc/config
 
-SEED_OFFSET=1530
+SEED_OFFSET=1740
 
 SEED=$((SEED_OFFSET + SLURM_ARRAY_TASK_ID - 1))
 
@@ -36,21 +36,21 @@ cd ${RUN_DIR}
 
 cp ${CONFIG_DIR}/avida .
 cp ${CONFIG_DIR}/avida.cfg .
-cp ${CONFIG_DIR}/default-heads.org .
+cp ${CONFIG_DIR}/longAncestralOrganism.org .
 cp ${CONFIG_DIR}/environment.cfg .
-cp ${CONFIG_DIR}/events.cfg .
+cp ${CONFIG_DIR}/eventsLongAncestralOrganism.cfg .
 cp ${CONFIG_DIR}/instset-heads___sensors_NONE.cfg .
 cp ${CONFIG_DIR}/analyze.cfg .
 
-EXECUTE="avida -s ${SEED} -set COPY_MUT_PROB 0.0025 -set COPY_INS_PROB 0.0 -set COPY_DEL_PROB 0.0 -set DIVIDE_INS_PROB 0.00 -set DIVIDE_DEL_PROB 0.00 -set DIVIDE_SLIP_PROB 0.0 -set SLIP_FILL_MODE 0 -set STERILIZE_UNSTABLE 1"
+EXECUTE="avida -s ${SEED} -set COPY_MUT_PROB 0.0025 -set COPY_INS_PROB 0.0 -set COPY_DEL_PROB 0.0 -set DIVIDE_INS_PROB 0.00 -set DIVIDE_DEL_PROB 0.00 -set DIVIDE_SLIP_PROB 0.0 -set SLIP_FILL_MODE 0 -set EVENT_FILE eventsLongAncestralOrganism.cfg -set STERILIZE_UNSTABLE 1"
 echo ${EXECUTE} > cmd.log
 ./${EXECUTE} > run.log
 ./${EXECUTE} -a > analyze.log
 
 rm avida
 rm avida.cfg
-rm default-heads.org
+rm longAncestralOrganism.org
 rm environment.cfg
-rm events.cfg
+rm eventsLongAncestralOrganism.cfg
 rm instset-heads___sensors_NONE.cfg
 rm analyze.cfg
