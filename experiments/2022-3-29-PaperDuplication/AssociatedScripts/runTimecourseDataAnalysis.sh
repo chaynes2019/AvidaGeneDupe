@@ -21,6 +21,7 @@ ANALYSIS_TIME=$((1000 * SLURM_ARRAY_TASK_ID))
 echo $ANALYSIS_TIME
 
 cp CodingSiteGeneratorHPCCCopy.py ${EXPERIMENT_DIR}/CodingSiteGeneratorHPCCCopy_${ANALYSIS_TIME}.py
+cp linesFromLineage.py ${EXPERIMENT_DIR}/linesFromLineage.py
 
 cp RunGeneDuplicationAvidaAnalysisScript.py RunGeneDuplicationAvidaAnalysisScript_${ANALYSIS_TIME}.py
 python3 RunGeneDuplicationAvidaAnalysisScript_${ANALYSIS_TIME}.py ${EXPERIMENT_ID} ${ANALYSIS_TIME}
@@ -29,7 +30,12 @@ rm RunGeneDuplicationAvidaAnalysisScript_${ANALYSIS_TIME}.py
 rm geneDuplicationDataAnalyzer_${ANALYSIS_TIME}.sh
 
 cd ${EXPERIMENT_DIR}
+module load gcc/11.2.0
+python3 linesFromLineage.py
 
+rm linesFromLineage.py
+
+cd ${EXPERIMENT_DIR}
 module load gcc/11.2.0
 python3 CodingSiteGeneratorHPCCCopy_${ANALYSIS_TIME}.py ${ANALYSIS_TIME}
 

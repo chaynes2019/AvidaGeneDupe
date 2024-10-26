@@ -11,9 +11,6 @@ a Pandas dataframe for each task with a list of coding sites, viability sites, a
 This script begins by collecting the paths to all of the directories where data will be found, and then it
 proceeds to iterate through those directories and apply the same analysis to each in turn.
 
-
-
-
 '''
 
 
