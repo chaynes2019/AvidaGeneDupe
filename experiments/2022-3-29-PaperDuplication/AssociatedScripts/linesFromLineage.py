@@ -2,10 +2,6 @@ import pathlib
 import shutil
 import random
 import os
-import numpy as np
-import pandas as pd
-import sys
-import uuid
 
 desiredUpdateToAnalyze = 50000
 
@@ -41,22 +37,41 @@ for subdir in os.listdir(dataDir):
             continue
         treatment.runDirectories.append(os.path.join(treatment.treatmentDir, run_dir))
 
-def try_slip_mutation(genome: str) -> str:
-    from_idx = random.randint(0, len(genome))
-    to_idx = random.randint(0, len(genome) + (from_idx != 0))
-    # TODO uncomment one
-    if to_idx < from_idx: # don't allow deletion --- slip insert only
+def do_slip_mutation_deletion(genome: str) -> str:
+    num_sites = len(genome)
+    if num_sites < 100:
         return genome
-    #if to_idx > from_idx: # don't allow insertion --- slip deletion only
-        #return genome
-    return genome[:to_idx] + genome[from_idx:]
+    num_available_to_delete = num_sites - 100
+    num_to_delete = random.randint(
+        int(num_available_to_delete > 0),  # delete at least one, if possible
+        num_available_to_delete,
+    )
+    lo = random.randint(
+        0,
+        num_sites - num_to_delete,
+    )
+    hi = lo + num_to_delete
+    res = genome[:lo] + genome[hi:]
+    assert len(res) <= len(genome)
+    assert len(res) >= 100 
+    return res
 
-def force_slip_mutation(genome: str) -> str:
-    result = genome
-    if (len(genome) > 100):
-        while result == genome or len(result) < 100:
-            result = try_slip_mutation(genome)
-    return result
+def do_slip_mutation_insertion(genome: str) -> str:
+    assert genome
+    sites = range(len(genome))
+    lo, hi = sorted(random.sample(sites, 2))
+    res = genome[:hi] + genome[lo:]
+    assert len(res) > len(genome)
+    return res
+
+
+def do_slip_mutation(genome: str) -> str:
+    return random.choice(
+        [
+            do_slip_mutation_deletion,
+            do_slip_mutation_insertion,
+        ],
+    )(genome)
 
 def rewriteLineageFile(runDir):
     lineageFilePath = os.path.join(runDir, f"Timepoint_{desiredUpdateToAnalyze}/data/detail_MostNumLineageAt50000.dat")
@@ -69,7 +84,7 @@ def rewriteLineageFile(runDir):
         if "#" not in line and line != "":
             words = line.split(" ")
             genome = words[-2]
-            words[-2] = force_slip_mutation(genome)
+            words[-2] = do_slip_mutation(genome)
 
             line = " ".join(words)
 
