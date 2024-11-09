@@ -68,8 +68,8 @@ def do_slip_mutation_insertion(genome: str) -> str:
 def do_slip_mutation(genome: str) -> str:
     return random.choice(
         [
-            #do_slip_mutation_deletion,
-            do_slip_mutation_insertion,
+            do_slip_mutation_deletion,
+            #do_slip_mutation_insertion,
         ],
     )(genome)
 
