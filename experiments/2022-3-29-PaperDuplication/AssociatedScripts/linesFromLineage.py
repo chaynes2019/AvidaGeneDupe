@@ -27,7 +27,7 @@ class Treatment():
         self.treatmentName = self.treatmentDir.split('/')[-1]
 
 for subdir in os.listdir(dataDir):
-    if subdir not in ["Slip-duplicate"]:
+    if subdir not in ["Baseline-Treatment"]:
         continue
     treatment = Treatment(os.path.join(dataDir,subdir))
     Treatments.append(treatment)
@@ -68,8 +68,8 @@ def do_slip_mutation_insertion(genome: str) -> str:
 def do_slip_mutation(genome: str) -> str:
     return random.choice(
         [
-            do_slip_mutation_deletion,
-            #do_slip_mutation_insertion,
+            #do_slip_mutation_deletion,
+            do_slip_mutation_insertion,
         ],
     )(genome)
 
