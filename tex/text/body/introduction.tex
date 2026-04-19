@@ -20,12 +20,13 @@ We also take advantage of the opportunity to trace duplicated sites across exact
 
 \input{fig/slip_mut_variants.tex}
 
-Here, we investigate the role of adaptation in gene duplication and the evolution of complexity using the Avida digital evolution platform.
-This system allows evolution experiments to be conducted using populations of self-replicating computer programs, operating as digital ``model organisms'' \citep{Ofria:2009avida};
-owing to heritable variation in replication rate introduced by copy errors, evolution by natural selection unfolds within these populations \citep{pennock2007models}.
-Among other early work with Avida, Lenski \textit{et al.} established a useful framework for quantifying the complexity of phenotypic traits evolved by Avida organisms, by counting the minimum number of necessary substeps to accomplish a task of interest \citet{Lenski2003Evolutionary}.
-Applying this lens to a phenotype  (``EQU'') comprising a large number of substeps, controlled experiments and step-by-step lineage analyses demonstrated that simple traits could provide building blocks for EQU --- and, in fact, amounted to necessary prerequisites for the evolution of complex traits.
-Other research projects with Avida have yielded wide-ranging contributions, shedding light on selection's influence on information-theoretic measures of genome complexity \citep{Adami2000Evolution}, co-evolutionary pressures toward complex phenotypic traits \citep{Zaman2014Coevolution}, and the abundance of genetic encodings for complex phenotypes \citep{Fortuna2017GenotypePhenotype}.
+Our experiments, testing how gene duplication impacts the evolution of complexity, use the Avida platform.
+This software allows evolution experiments to be conducted on populations of self-replicating computer programs, operating as digital ``model organisms'' \citep{Ofria:2009avida}.
+Because copy errors may introduce heritable variation in how efficiently programs replicate, evolution by natural selection unfolds within these populations \citep{pennock2007models}.
+In early work with Avida, Lenski \textit{et al.} established a useful framework for selecting on phenotypic traits across a well-defined spectrum of complexity.
+Under this framework, input/output calculations are considered as phenotypic traits, with the complexity of a given task defined according to the minimum number of necessary substeps to accomplish a task of interest \citet{Lenski2003Evolutionary}.
+Applying this lens to a trait  (``EQU'') comprising a large number of substeps, controlled experiments and step-by-step lineage analyses demonstrated that simpler traits could provide building blocks for EQU --- and, in fact, amounted to necessary prerequisites for the evolution of this complex trait.
+Other research using Avida has yielded wide-ranging contributions, shedding light on how selection influences information-theoretic measures of genome complexity \citep{Adami2000Evolution}, co-evolutionary pressures for complexity \citep{Zaman2014Coevolution}, and the abundance of possible genetic encodings for complex phenotypes \citep{Fortuna2017GenotypePhenotype}.
 
 To determine the role of adaptation in complexity arising from gene duplication, we independently assessed the influence of slip-duplication mutations on both genetic and phenotypic complexity.
 We measured genetic complexity by counting the program instructions contributing to an organism's fitness.
