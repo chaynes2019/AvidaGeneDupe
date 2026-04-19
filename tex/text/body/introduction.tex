@@ -1,20 +1,19 @@
 \section{Introduction} \label{sec:introduction}
 
-A key challenge in evolutionary biology is understanding how complex phenotypic traits and new genetic information arise.
-Theory identifies gene duplication as a major contributor to biological diversity and complexity \citep{Zhang2003,Otto2000,Wagner2008,Crow:2006role,Magadum:2013wu,Metz:chromosomeDuplication1947,Hu:2010ea,Castellanos2024,Lynch2000b,Lynch2003}.
-While comparative genomic studies have provided an increasingly detailed account of duplication events shaping genetic and phenotypic traits in nature \citep{Zhang2014,teichmann_structural_1998,Teichmann:2004cz,DuBose2024,Voordeckers2012,Pougach2014,Moore2003}, ambiguities remain in bridging these findings with explicit, process-based models of evolutionary dynamics \citep{Welch2016}.
-In particular, it remains difficult to gauge the importance of adaptive processes like neo-functionalization and dose effects versus contingent processes driven by drift and historical constraint \citep{Innan2010,Zhang:2003fw,Kuzmin2022}.
+A key objective of evolutionary biology is to understand how complex phenotypic traits and new genetic information arise;
+theory identifies gene duplication as a prime suspect \citep{Zhang2003,Otto2000,Wagner2008,Crow:2006role,Magadum:2013wu,Metz:chromosomeDuplication1947,Hu:2010ea,Castellanos2024,Lynch2000b,Lynch2003}.
+While comparative studies provide increasingly detailed accounts of duplication events shaping specific evolved traits \citep{Zhang2014,teichmann_structural_1998,Teichmann:2004cz,DuBose2024,Voordeckers2012,Pougach2014,Moore2003}, work remains to develop systematic understanding citep{Welch2016} of gene duplication's broader role in both adaptive and neutral evolutionary processes \citep{Innan2010,Zhang:2003fw,Kuzmin2022}.
 
 % Mirroring larger questions around the adaptive framings of evolutionary origins of biological complexity, gene duplication is thought to lead to increased complexity both by increasing opportunities for the accumulation of contingent complexity (``sub-functionalization'') and by facilitating adaptive discovery of beneficial novel traits (``neo-functionalization'').
-In modern evolutionary biology, experimental approaches have become an important complement to retrospective studies, helping to establish causality in evolutionary dynamics \citep{Kawecki2012,Elena2003}.
-Notable experimental evidence using microbial populations has established the adaptive significance of duplicative dose effects \citep{Tong2025,Dhar2014,Nsvall2012}.
-Also notable is recent \textit{in vivo} experimental work by \citet{mihajlovic2025direct}, who apply a directed evolution approach using fluorescence-activated cell sorting to compare the rate of adaptive evolution between \textit{E. coli} strains differing in copy count for genes encoding fluorescing protein coGFP.
-Over five rounds of mutagenesis, amplification, and selection, Mihajlovic et al. demonstrate that fluorescence phenotypes in double-copy populations exhibit greater robustness under mutation, but they do not find evidence of faster adaptation in double-copy populations vis-a-vis fluorescence intensity.
+In modern evolutionary biology, experimental approaches have become an important complement to retrospective studiesin directly testing evolutionary causality \citep{Kawecki2012,Elena2003}.
+In the context of gene duplication, microbial experiments have concretely established the adaptive significance of duplicative dose effects \citep{Tong2025,Dhar2014,Nsvall2012}.
+Also notable is recent microbial experiments by \citet{mihajlovic2025direct}, who compare evolution of fluorescence phenotypes between single- and double-copy coGFP populations.
+The latter exhibits greater robustness under mutation, but no faster adaptive change under selection.
 As the authors highlight, though, achieving the work within their model system required trade-offs in using mutation rates and selection pressures differing significantly from those typical in natural evolution.
 
 The theme of evolution of complexity has drawn notable contributions, in particular, from experiments incorporating digital model systems \citep{Fortuna2022}.
-While lacking in realism and richness compared to work with biological organisms, \textit{in silico} approaches offer complementary capabilities in supporting principled definitions of complexity \citep{Adami2002}, fast throughput spanning thousands of generations, and flexible exploration of arbitrary counterfactuals \citep{langton1989artificial}.
-In this work, digital systems allow us to systematically enable or disable duplications, supporting direct comparisons of evolutionary outcomes.
+While substantially abstracting some aspects of biological organisms, \textit{in silico} approaches in return support principled definitions of complexity \citep{Adami2002}, fast throughput spanning thousands of generations, and flexible exploration of arbitrary counterfactuals \citep{langton1989artificial}.
+In this work, use of digital organisms allows us to enable and disable duplications wholesale, then directly comparisons of evolutionary outcomes.
 Insight may also be gained from tracing the fate of duplicated sites, given the availability of exhaustive mutational histories.
 
 \input{fig/slip_mut_variants.tex}
