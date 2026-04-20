@@ -3,6 +3,7 @@
 A key objective of evolutionary biology is to understand processes that give rise to new genetic information and complex phenotypic traits;
 existing theory identifies gene duplication as one prime suspect \citep{Zhang2003,Otto2000,Wagner2008,Crow:2006role,Magadum:2013wu,Metz:chromosomeDuplication1947,Hu:2010ea,Castellanos2024,Lynch2000b,Lynch2003}.
 While comparative studies provide increasingly detailed accounts of duplication events shaping specific evolved traits \citep{Zhang2014,teichmann_structural_1998,Teichmann:2004cz,DuBose2024,Voordeckers2012,Pougach2014,Moore2003}, work remains to develop systematic understanding \citep{Welch2016} of gene duplication's broader role in both adaptive and neutral evolutionary processes \citep{Innan2010,Zhang:2003fw,Kuzmin2022}.
+In this paper, we set out to test the impact of gene duplication on evolution of structural and functional complexity, and the extent to which such impact depends on the actual genetic information content within duplications.
 
 % Mirroring larger questions around the adaptive framings of evolutionary origins of biological complexity, gene duplication is thought to lead to increased complexity both by increasing opportunities for the accumulation of contingent complexity (``sub-functionalization'') and by facilitating adaptive discovery of beneficial novel traits (``neo-functionalization'').
 In recent years, experimental approaches that directly test evolutionary causality have become an important complement to observational studies of natural history \citep{Kawecki2012,Elena2003}.
@@ -13,18 +14,19 @@ As the authors highlight, though, practical constraints required they impose mut
 
 Experimental work has also made substantial headway in explaining how complexity evolves.
 Here, many contributions, have relied on digital model systems \citep{Fortuna2022}.
-While by necessity substantially abstracting some aspects of biological organisms \citep{peck2004simulation}, \textit{in silico} experiments on the other hand support principled definitions of complexity \citep{Adami2002}, fast throughput spanning thousands of generations, and flexible exploration of arbitrary counterfactuals \citep{langton1989artificial}.
-In this work, we rely on a digital organisms model to allow wholesale suppression of duplicative mutations, as well as intermediate interventions partially disabling them.
+Though substantially abstracting aspects of biological organisms \citep{peck2004simulation}, \textit{in silico} experiments can, on the other hand, allow principled definitions of complexity \citep{Adami2002}, fast throughput spanning thousands of generations, and flexible exploration of arbitrary counterfactuals \citep{langton1989artificial}.
+In this work, we rely on digital capabilities to enact wholesale suppression of duplicative mutations, as well as intermediate interventions partially disabling them.
 We also take advantage of the opportunity to trace duplicated sites across exact lineage histories \citep{dolson2024phylotrack}, and thereby directly ascertain their role in later innovation.
 
 \input{fig/slip_mut_variants.tex}
 
-Here, we investigate the role of adaptation in gene duplication and the evolution of complexity using the Avida digital evolution platform.
-This system allows evolution experiments to be conducted using populations of self-replicating computer programs, operating as digital ``model organisms'' \citep{Ofria:2009avida};
-owing to heritable variation in replication rate introduced by copy errors, evolution by natural selection unfolds within these populations \citep{pennock2007models}.
-Among other early work with Avida, Lenski \textit{et al.} established a useful framework for quantifying the complexity of phenotypic traits evolved by Avida organisms, by counting the minimum number of necessary substeps to accomplish a task of interest \citet{Lenski2003Evolutionary}.
-Applying this lens to a phenotype  (``EQU'') comprising a large number of substeps, controlled experiments and step-by-step lineage analyses demonstrated that simple traits could provide building blocks for EQU --- and, in fact, amounted to necessary prerequisites for the evolution of complex traits.
-Other research projects with Avida have yielded wide-ranging contributions, shedding light on selection's influence on information-theoretic measures of genome complexity \citep{Adami2000Evolution}, co-evolutionary pressures toward complex phenotypic traits \citep{Zaman2014Coevolution}, and the abundance of genetic encodings for complex phenotypes \citep{Fortuna2017GenotypePhenotype}.
+Our experiments, testing how gene duplication impacts the evolution of complexity, use the Avida platform.
+This software allows evolution experiments to be conducted on populations of self-replicating computer programs, operating as digital ``model organisms'' \citep{Ofria:2009avida}.
+Because copy errors may introduce heritable variation in how efficiently programs replicate, evolution by natural selection unfolds within these populations \citep{pennock2007models}.
+In early work with Avida, Lenski \textit{et al.} established a useful framework for selecting on phenotypic traits across a well-defined spectrum of complexity.
+Under this framework, input/output calculations are considered as phenotypic traits, with the complexity of a given task defined according to the minimum number of necessary substeps to accomplish a task of interest \citet{Lenski2003Evolutionary}.
+Applying this lens to a trait  (``EQU'') comprising a large number of substeps, controlled experiments and step-by-step lineage analyses demonstrated that simpler traits could provide building blocks for EQU --- and, in fact, amounted to necessary prerequisites for the evolution of this complex trait.
+Other research using Avida has yielded wide-ranging contributions, shedding light on how selection influences information-theoretic measures of genome complexity \citep{Adami2000Evolution}, co-evolutionary pressures for complexity \citep{Zaman2014Coevolution}, and the abundance of possible genetic encodings for complex phenotypes \citep{Fortuna2017GenotypePhenotype}.
 
 To determine the role of adaptation in complexity arising from gene duplication, we independently assessed the influence of slip-duplication mutations on both genetic and phenotypic complexity.
 We measured genetic complexity by counting the program instructions contributing to an organism's fitness.
