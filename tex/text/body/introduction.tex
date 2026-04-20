@@ -1,13 +1,9 @@
 \section{Introduction} \label{sec:introduction}
 
 A key objective of evolutionary biology is to understand processes that give rise to new genetic information and complex phenotypic traits;
-existing theory identifies gene duplication as one prime suspect \citep{Zhang2003,Otto2000,Wagner2008,Crow:2006role,Magadum:2013wu,Metz:chromosomeDuplication1947,Hu:2010ea,Castellanos2024,Lynch2000b,Lynch2003}.
-While comparative studies provide increasingly detailed accounts of duplication events shaping specific evolved traits \citep{Zhang2014,teichmann_structural_1998,Teichmann:2004cz,DuBose2024,Voordeckers2012,Pougach2014,Moore2003}, work remains to develop systematic understanding \citep{Welch2016} of gene duplication's broader role in both adaptive and neutral evolutionary processes \citep{Innan2010,Zhang:2003fw,Kuzmin2022}.
-In this paper, we experimentally test the impact of gene duplication on evolution of structural and functional complexity, and the extent to which such impact depends on the actual genetic information content within duplications.
-
-% We find that gene duplication facilitates adaptive evolution of novel phenotypic traits, with this adaptive benefit appearing exclusively for complex traits.
-% Moreover, we show genome sites encoding complex phenotypic traits to be disproportionately localized within slip-duplicated regions.
-% Genetic complexity, by comparison, did not appreciably respond to duplication treatments.
+existing theory identifies gene duplication as one prime suspect \citep{Zhang2003,Otto2000,Wagner2008,Crow:2006role,Magadum:2013wu,Metz:chromosomeDuplication1947,Hu:2010ea,Castellanos2024,Lynch2000b,Lynch2003,Birchler2022}.
+While comparative studies provide increasingly detailed accounts of duplication events shaping specific evolved traits \citep{Zhang2014,teichmann_structural_1998,Teichmann:2004cz,DuBose2024,Voordeckers2012,Pougach2014,Moore2003,Ogino2015,Tasnim2024,Assis2013,Deng2010,Monson2003,Xue2026,Lynch2007Inventing}, work remains to develop systematic understanding \citep{Welch2016} of gene duplication's broader role in both adaptive and neutral evolutionary processes \citep{Innan2010,Zhang:2003fw,Kuzmin2022}.
+In this paper, we evaluate the impact of gene duplication on evolution of structural and functional complexity, and the extent to which such impact depends on the actual genetic information content within duplications.
 
 % Mirroring larger questions around the adaptive framings of evolutionary origins of biological complexity, gene duplication is thought to lead to increased complexity both by increasing opportunities for the accumulation of contingent complexity (``sub-functionalization'') and by facilitating adaptive discovery of beneficial novel traits (``neo-functionalization'').
 In recent years, such experimental approaches --- which directly test evolutionary causality --- have become an important complement to observational studies of natural history \citep{Kawecki2012,Elena2003}.
@@ -24,7 +20,7 @@ We also take advantage of the opportunity to trace duplicated sites across exact
 
 \input{fig/slip_mut_variants.tex}
 
-Digital evolution experiments were conducted using the Avida platform.
+Our digital experiments were conducted using the Avida platform.
 This software administers populations of self-replicating computer programs, operating as digital ``model organisms'' \citep{Ofria:2009avida}.
 Because copy errors may introduce heritable variation in how efficiently programs replicate, evolution by natural selection unfolds within these populations \citep{pennock2007models}.
 
@@ -36,15 +32,19 @@ To comprehensively test complexity outcomes, we additionally considered a measur
 Here, we counted genome instructions contributing to an organism's fitness \citep{Adami2002}.
 Adaptive sites were identified through single-site knockouts \citep{moreno2024cryptic}, replacing genome instructions one-by-one with no-operation stand-ins.
 
-% Our results therefore contrast with perspectives on biological complexity according lesser significance to the role of adaptive innovation \citep{Lynch2000,Beslon2021,Lynch2007}.
-%, which expect changes more strongly associated with subfunctionalization of existing traits \citep{TODO}.
+With respect to both two complexity metrics, we find that gene duplication can systematically increase evolved complexity.
+Control treatments reveal that information content within duplicated regions acts to catalyze genome expansion.
+This expansion, in turn, suffices to promote simple adaptive traits and increased coding site count --- in line with neutralist explanations for biological complexity \citep{Lynch2000,Beslon2021,Lynch2007}
+However, we also find that information content within duplicated regions acts to catalyze complex traits, beyond the effects of increased genome size alone.
+Disproportionate coding sites for complex traits, in fact, trace back to slip-duplicated regions.
+Gene duplication thus also systematically promotes complex functional innovation in adaptation-driven scenarios.
 
-Figure \ref{fig:slip_mut_variants} overviews our experimental design.
+Figure \ref{fig:slip_mut_variants} details our experimental design.
 We performed experiments using well-mixed populations with a carrying capacity of 3,600 Avida organisms.
 To supply adaptive potential, organisms were rewarded for nine defined phenotypic traits --- each trait corresponding to a possible logical transform on binary inputs.
 Under this scheme, organisms producing correct output values for a task benefit by accelerating their genetic operations, analogous to metabolism.
-Formally, ``substeps'' necessary to carry out each task may be quantified in terms of the minimum number of NAND operations necessary to carry it out \citep{Lenski2003Evolutionary}.%
-\footnote{
+Formally, ``substeps'' necessary to carry out each task may be quantified in terms of the minimum number of NAND operations necessary to carry it out \citep{Lenski2003Evolutionary}.
+\unskip\footnote{
 Computer architecture theory considers NAND as a fundamental basis operation, since all other logic can be derived from compositions of NAND operations \citep{mano1997logic}.
 }
 The most complex function (EQU) requires five NAND operations while the simplest (NAND and NOT) require only one.
