@@ -32,9 +32,9 @@ In early work with Avida, Lenski \textit{et al.} established a useful framework 
 Under this framework, input/output calculations are considered as phenotypic traits, with the complexity of a given task defined according to the minimum number of necessary substeps \citep{Lenski2003Evolutionary}.
 Applying this lens, Lenski \textit{et al.} demonstrated that simpler traits could provide building blocks for complex ones --- and, in fact, often amounted to necessary prerequisites for their evolution.
 
-To comprehensively test complexity outcomes, we also required a measure of structural complexity --- in addition to Lenski's measure of functional phenotypic complexity.
-To measure genetic complexity, we counted the program instructions contributing to an organism's fitness \citep{Adami2002}.
-Genomes' adaptive sites were identified through single-site knockouts \citep{moreno2024cryptic}, replacing genome instructions one-by-one with no-operation stand-ins.
+To comprehensively test complexity outcomes, we additionally considered a measure of structural genetic complexity.
+Here, we counted genome instructions contributing to an organism's fitness \citep{Adami2002}.
+Adaptive sites were identified through single-site knockouts \citep{moreno2024cryptic}, replacing genome instructions one-by-one with no-operation stand-ins.
 
 % Our results therefore contrast with perspectives on biological complexity according lesser significance to the role of adaptive innovation \citep{Lynch2000,Beslon2021,Lynch2007}.
 %, which expect changes more strongly associated with subfunctionalization of existing traits \citep{TODO}.
@@ -42,7 +42,7 @@ Genomes' adaptive sites were identified through single-site knockouts \citep{mor
 Figure \ref{fig:slip_mut_variants} overviews our experimental design.
 We performed experiments using well-mixed populations with a carrying capacity of 3,600 Avida organisms.
 To supply adaptive potential, organisms were rewarded for nine defined phenotypic traits --- each trait corresponding to a possible logical transform on binary inputs.
-Under this scheme, organisms producing correct output values for a task benefit by accelerating their instruction operations (thus, also their self-replication), analogously to a metabolic process.
+Under this scheme, organisms producing correct output values for a task benefit by accelerating their genetic operations, analogous to metabolism.
 Formally, ``substeps'' necessary to carry out each task may be quantified in terms of the minimum number of NAND operations necessary to carry it out \citep{Lenski2003Evolutionary}.%
 \footnote{
 Computer architecture theory considers NAND as a fundamental basis operation, since all other logic can be derived from compositions of NAND operations \citep{mano1997logic}.
