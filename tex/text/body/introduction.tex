@@ -5,6 +5,10 @@ existing theory identifies gene duplication as one prime suspect \citep{Zhang200
 While comparative studies provide increasingly detailed accounts of duplication events shaping specific evolved traits \citep{Zhang2014,teichmann_structural_1998,Teichmann:2004cz,DuBose2024,Voordeckers2012,Pougach2014,Moore2003}, work remains to develop systematic understanding \citep{Welch2016} of gene duplication's broader role in both adaptive and neutral evolutionary processes \citep{Innan2010,Zhang:2003fw,Kuzmin2022}.
 In this paper, we set out to test the impact of gene duplication on evolution of structural and functional complexity, and the extent to which such impact depends on the actual genetic information content within duplications.
 
+% We find that gene duplication facilitates adaptive evolution of novel phenotypic traits, with this adaptive benefit appearing exclusively for complex traits.
+% Moreover, we show genome sites encoding complex phenotypic traits to be disproportionately localized within slip-duplicated regions.
+% Genetic complexity, by comparison, did not appreciably respond to duplication treatments.
+
 % Mirroring larger questions around the adaptive framings of evolutionary origins of biological complexity, gene duplication is thought to lead to increased complexity both by increasing opportunities for the accumulation of contingent complexity (``sub-functionalization'') and by facilitating adaptive discovery of beneficial novel traits (``neo-functionalization'').
 In recent years, experimental approaches that directly test evolutionary causality have become an important complement to observational studies of natural history \citep{Kawecki2012,Elena2003}.
 In the context of gene duplication, microbial experiments have confirmed the adaptive significance of duplicative dose effects \citep{Tong2025,Dhar2014,Nsvall2012}.
@@ -23,30 +27,29 @@ We also take advantage of the opportunity to trace duplicated sites across exact
 Our experiments, testing how gene duplication impacts the evolution of complexity, use the Avida platform.
 This software allows evolution experiments to be conducted on populations of self-replicating computer programs, operating as digital ``model organisms'' \citep{Ofria:2009avida}.
 Because copy errors may introduce heritable variation in how efficiently programs replicate, evolution by natural selection unfolds within these populations \citep{pennock2007models}.
+Other research using this model has yielded wide-ranging contributions, shedding light on how selection influences information-theoretic measures of genome complexity \citep{Adami2000Evolution}, co-evolutionary pressures for complexity \citep{Zaman2014Coevolution}, and the abundance of possible genetic encodings for complex phenotypes \citep{Fortuna2017GenotypePhenotype}.
+
 In early work with Avida, Lenski \textit{et al.} established a useful framework for selecting on phenotypic traits across a well-defined spectrum of complexity.
 Under this framework, input/output calculations are considered as phenotypic traits, with the complexity of a given task defined according to the minimum number of necessary substeps to accomplish a task of interest \citet{Lenski2003Evolutionary}.
 Applying this lens to a trait  (``EQU'') comprising a large number of substeps, controlled experiments and step-by-step lineage analyses demonstrated that simpler traits could provide building blocks for EQU --- and, in fact, amounted to necessary prerequisites for the evolution of this complex trait.
-Other research using Avida has yielded wide-ranging contributions, shedding light on how selection influences information-theoretic measures of genome complexity \citep{Adami2000Evolution}, co-evolutionary pressures for complexity \citep{Zaman2014Coevolution}, and the abundance of possible genetic encodings for complex phenotypes \citep{Fortuna2017GenotypePhenotype}.
 
-To determine the role of adaptation in complexity arising from gene duplication, we independently assessed the influence of slip-duplication mutations on both genetic and phenotypic complexity.
-We measured genetic complexity by counting the program instructions contributing to an organism's fitness.
-For phenotypic complexity, we used the minimal quantity of computational substeps necessary to recreate exhibited behaviors \citet{Lenski2003Evolutionary}.
-We find that gene duplication facilitates adaptive evolution of novel phenotypic traits, with this adaptive benefit appearing exclusively for complex traits.
-Moreover, we show genome sites encoding complex phenotypic traits to be disproportionately localized within slip-duplicated regions.
-Genetic complexity, by comparison, did not appreciably respond to duplication treatments.
+To comprehensively test complexity outcomes, we also required a measure of structural complexity --- in addition to Lenski's measure of functional phenotypic complexity.
+To measure genetic complexity, we counted the program instructions contributing to an organism's fitness \citep{Adami2002}.
+Such adaptive sites were identified through single-site knockouts \citep{moreno2024cryptic},
+
+
 % Our results therefore contrast with perspectives on biological complexity according lesser significance to the role of adaptive innovation \citep{Lynch2000,Beslon2021,Lynch2007}.
 %, which expect changes more strongly associated with subfunctionalization of existing traits \citep{TODO}.
 
-Figure \ref{fig:slip_mut_variants} provides a schematic overview of the experiments conducted in our work.
+Figure \ref{fig:slip_mut_variants} overviews our experimental design.
 We performed experiments using well-mixed populations with a carrying capacity of 3,600 Avida organisms.
-To supply adaptive potential, we adopted an framework developed by Lenski \citet{Lenski2003Evolutionary} to define a set of nine advantageous phenotypic traits.
-Each trait corresponds to a possible logical transform on available binary inputs.
-Under this scheme, organisms producing correct output values for a task benefit by accelerating their genome evaluation (and, thus, also their self-replication), analogously to a metabolic process.
+To supply adaptive potential, organisms were rewarded for nine defined phenotypic traits --- each trait corresponding to a possible logical transform on binary inputs.
+Under this scheme, organisms producing correct output values for a task benefit by accelerating their instruction operations (thus, also their self-replication), analogously to a metabolic process.
 Formally, ``substeps'' necessary to carry out each task may be quantified in terms of the minimum number of NAND operations necessary to carry it out \citep{Lenski2003Evolutionary}.%
 \footnote{
 Computer architecture theory considers NAND as a fundamental basis operation, since all other logic can be derived from compositions of NAND operations \citep{mano1997logic}.
 }
-As seen in Figure \ref{fig:slip_mut_variants}, the most complex function (EQU) requires five NAND operations while the simplest (NAND and NOT) require only one.
+The most complex function (EQU) requires five NAND operations while the simplest (NAND and NOT) require only one.
 % In other work, EQU has been shown to require at least around 20 constituent genome sites, with many possible longer ways to accomplish EQU \citep{Lenski2003Evolutionary}.
 
 Avida organisms replicate asexually by copying their genome one site at a time.
