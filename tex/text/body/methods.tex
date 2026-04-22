@@ -5,7 +5,7 @@
 We conducted experiments using a custom version of Avida v2.14.0, extended to support our slip mutation ablation treatments \citep{Ofria:2009avida}.
 Supporting software and executable notebooks for this work are freely available under the GNU GPL license, via GitHub at \url{https://github.com/chaynes2019/AvidaGeneDupe/} and archived via Zenodo \citep{haynes_2025,https://doi.org/10.25495/7gxk-rd71}.
 Simulation data is archived via the Open Science Framework at \url{https://osf.io/j5s4h/} \citep{Moreno_Haynes_2025,foster2017open}, provided with a CC-By Attribution 4.0 International license.
-Some components of our experiments were adapted from an earlier version of this work \citep{lalejini2017gene}.
+Experiments reported here extend an earlier conference publication \citep{lalejini2017gene}.
 Code used in this project incorporated numerous pieces of open-source scientific software \citep{2020SciPy-NMeth,harris2020array,reback2020pandas,mckinney-proc-scipy-2010,waskom2021seaborn,hunter2007matplotlib,moreno2023teeplot,r_core_team_r:_2015}.
 
 Populations were well mixed and configured to the Avida default size of 3,600 organisms across all trials.
@@ -18,7 +18,7 @@ Logic tasks were also described in terms of minimum required NAND operations as 
 
 Except where otherwise noted, experiments were seeded with a 100-instruction ancestral self-replicator.
 In all cases, mutations reducing genome size below 100 instructions were disallowed to ensure sufficient genetic material to encode phenotypic traits.
-Run length was 200,000 ``updates'' across all experiments, a unit of simulation time equivalent to the time required for an organism to execute 30 instructions.
+Run length was 200,000 updates across all experiments, where a single update processes on average 30 genome instructions per organism.
 This duration was sufficient to observe at least 600 generations of evolution in all trials.
 
 \subsection{Mutation operators}
@@ -50,7 +50,7 @@ Across trials, we assessed full-fledged slip-duplicate mutation in comparison wi
 \item \textbf{slip-NOP}, where duplicated code was replaced with neutral (``no-operation'') instructions to test the effect of neutral increase in genome size, and
 \item \textbf{slip-scatter}, where duplicated code was dispersed across the genome to test the effect of insertion locality.
 \end{enumerate}
-Figure \ref{fig:slip_mut_variants} illustrates example outcomes across surveyed slip-mutation variants.
+Figure \ref{fig:slip_mut_variants} illustrates surveyed slip-mutation variants.
 % [x] @CAO: I don't think it's worth starting whole new runs now, but the one other treatment I know we've at least talked about in the past is something like "slip-background" which is like slip-random, but where we look at the background distribution of instructions in the population to bias the random probabilities.  This can help distinguish why slip-scramble does better than slip random -- is it the instructions in the genome itself, or is it just that these are more likely to be instructions that are generally useful which is why they were selected by evolution in the first place.
 
 When insertion occurs, all slip mutation operators add a number of instructions equal to the length of the target segment.
@@ -82,7 +82,7 @@ Second-phase data was used for analyses of task gain by complexity class (Figure
 Phenotypic adaption scores shown in Figure \ref{fig:results_panels} were also derived from second-phase experiments.
 
 For experiments incorporating the long-genome baseline control, timecourses of adaptive evolution were compared in terms of generations, rather than in terms of updates (simulation timesteps).
-This strategy was necessary to account for the long-genome controls elapsing on the order of 10$\times$ fewer generations than baseline conditions, on account of self-replication proceeding slower with more genome content.
+This strategy was necessary to account for the long-genome controls elapsing on the order of 10$\times$ fewer generations than baseline conditions, since self-replication is slower for longer genomes.
 In other experiments, control treatments generally elapsed at least as many generations as the slip-duplication experimental treatment, on account of comparable or shorter genome lengths.
 Thus, even when comparing by update in these other experiments, acceleration of adaptation under slip duplication could not be have been caused by more generations elapsing under the slip-duplication treatment.
 % % Slip-duplicate treatment
