@@ -4,18 +4,18 @@
 
 \input{fig/results_panels_new.tex}
 
-In a first set of experiments, we investigated the impact of slip duplications on \textit{de novo} evolution of adaptive phenotypic traits.
-We found slip duplications to yield significantly higher evolved trait counts than the baseline treatment (two-tailed Mann-Whitney U test, $W = 562.5$, Bonferroni-adjusted $p << 0.0001$; Figure \ref{fig:results_panels:slip_duplication}).
-Many replicates evolved larger genomes, some increasing 10-fold over their original 100-instruction starting point.
-To test whether this increased genome length was responsible for adaptive benefits seen in the slip-duplication treatment, we performed additional experiments incorporating a ``long-genome'' control treatment initialized using genomes extended to 1,000 sites by padding the genome with ``no-operation'' instructions that perform no computation (so-called ``NOP'' instructions).
+In a first set of experiments, we investigated whether gene duplication facilitated \textit{de novo} evolution of adaptive phenotypic traits.
+Replicates with duplication indeed evolved more adaptive traits than under baseline conditions (two-tailed Mann-Whitney U test, $W = 562.5$, Bonferroni-adjusted $p << 0.0001$; Figure \ref{fig:results_panels:slip_duplication}).
+In many cases, gene duplication grew genome size substantially; some swelling up to 10-fold beyond their original 100-instruction starting point (Figure \ref{fig:num-coding-sites:total}).
+To test whether increased genome size alone could account for gene duplication's adaptive benefit, we performed additional experiments incorporating a ``long-genome'' control treatment with 1,000-site genomes.
 
 \input{fig/adaptive-evolution-rate.tex}
 
-We observed that longer genomes evolved significantly greater task acquisition than the baseline genome lengths.
-Disaggregating by task complexity, though, reveals impact of genome length as most prominent in the acquisition of simple tasks.
-The long-genome control matched or exceeded the performance of slip-duplication in evolving simple traits with 3 or fewer components (Figure \ref{fig:adaptive-evolution-rate}).
+This long-genome control also evolved adaptive traits more readily than baseline conditions (Supplementary Figure \ref{fig:adaptive-evolution-rate-agg}).
+However, disaggregating by task complexity reveals genome size to primarily boost simple adaptation.
+For traits requiring 3 or fewer NANDs, adaptation in the long-genome control matched or exceeded gene duplication when compared generation-by-generation (Figure \ref{fig:adaptive-evolution-rate}).
+By contrast, increased genome size alone failed to match duplication in promoting complex 4- and 5-NAND traits (Fisher's exact tests; 36/60 vs. 24/60, $p<0.05$ [4 components]; 10/30 vs. 2/30, $p<0.03$ [5 components]; Figure \ref{fig:adaptive-evolution-rate}).
 % https://github.com/chaynes2019/AvidaGeneDupe/blob/538ede79c7301f10718ca96c8dd38782b6882632/binder/adaptive-evolution-rate.ipynb
-However, slip duplication evolved more complex 4- and 5-component traits within a significantly higher fraction of replicates compared to the long-genome control (Fisher's exact tests; 36/60 vs. 24/60, $p<0.05$ [4 components]; 10/30 vs. 2/30, $p<0.03$ [5 components]; Figure \ref{fig:adaptive-evolution-rate}).
 
 % ---
 % @AML: Moved to discussion
