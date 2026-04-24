@@ -155,7 +155,7 @@ Thus, gene duplication does appear to play a specific role in accumulating uncon
 %       - The recap can be nice for readers who jump around sections, but I'd be fine cutting it if we need the space or if folks feel that it's too redundant with the rest of the manuscript.
 %      - Pretty much copied over the key findings from the cover letter
 In this work, we used \textit{in silico} evolution experiments to test hypotheses that gene duplication can facilitate evolution of novel adaptation and biological complexity.
-To conduct these experiments, we adapted an established framework developed by Lenski et al. \citep{Lenski2003Evolutionary} to study adaptation across a well-defined spectrum of functional complexity.
+To conduct these experiments, we adapted an established framework developed by Lenski \textit{et al.} \citep{Lenski2003Evolutionary} to study adaptation across a well-defined spectrum of functional complexity.
 Though necessarily limited in fully reflecting natural organisms, such digital models can nonetheless provide useful footholds to biological science \citep{Fortuna2022,Adami2000Evolution,Zaman2014Coevolution,Fortuna2017GenotypePhenotype,Gupta2016,Goldsby2012,Goldsby2014,Lenski1999,Misevic2005,Clune2008,Clune2012,Covert2013,Elena2007,Wilke2001,Hazen2007}.
 
 Our results demonstrate that gene duplications can promote the \textit{de novo} evolution of adaptive traits.
@@ -180,26 +180,27 @@ A key aspect of Lenski et al.'s model of phenotypic complexity is functional ove
 In this context, gene duplication's observed role in facilitating complex traits (Figure \ref{fig:adaptive-evolution-rate}) is broadly consistent with a ``building block'' model \citep{Jacob1977} --- where duplication facilitates novel assemblages of existing components.
 Exploring how these dynamics are shaped by mechanistic complications, such as regulatory network structure \citep{CussatBlanc2019,Lalejini2021}, is an exciting direction for future work.
 
-\subsection{Sequence information of duplications contributes to adaptive outcomes}
+\subsection{Adaptation harnesses sequence information of duplications}
 
-Our digital study system allowed us to further disentangle which characteristics of gene duplications increase evolutionary potential by imposing variants of the slip mutation operator, isolating individual aspects of duplications (Figure~\ref{fig:slip_mut_variants}).
-We find that only duplications of existing genetic information --- either as-is or in a ``scrambled'' order --- provide adaptive benefit, with those preserving both content and order ultimately performing best.
-In contrast, slip mutation variants that insert non-functional or random genetic material provide no observable adaptive benefit over a baseline control (Figure~\ref{fig:results_panels}).
-These results indicate that both the content and structure of duplicated genetic material contribute to adaptive evolution, beyond the impact of side effects such as an increase in genome size or mutational supply.
-This finding is consistent with theoretical expectations that gene duplications generate both raw material and combinatorial novelty, enabling subfunctionalization and neofunctionalization \citep{ohno1970evolution,Lynch2000}.
+In order to isolate how gene duplication facilitates adaptation, we tested a suite of partial analogs for full-fledged gene duplication (Figure~\ref{fig:slip_mut_variants}).
+Insertions that increase genome size without propagating genetic information provided no adaptive benefit.
+By contrast, both sequence duplications and shuffled duplications expedited adaptation, with the former (preserving sequence order) yielding the strongest effect (Figure~\ref{fig:results_panels}).
+These results show that, rather than side effects of genome expansion and mutation supply, adaptation can specifically harness information content of duplications --- as in classical descriptions of subfunctionalization and neofunctionalization \citep{ohno1970evolution,Lynch2000}.
 
-Interestingly, unlike our long-genome control, we did not observe an adaptive benefit from the NOP-insert slip-duplication treatment (Figure~\ref{fig:results_panels}).
-One possible explanation for this difference is selection against mutational load associated with increased genome length.
-Indeed, in preliminary experiments we found that deleterious mutational load associated with larger genome size frequently drove genome shrinkage.
-We found genome size to grow significantly larger under full slip-duplication compared to NOP-insert slip-duplication --- by a factor of almost 4$\times$ (Supplementary Figure~\ref{fig:ablation-site-counts}).
-This pattern aligns with established theory that mechanistic factors such as dose effects or neutral accumulation of arbitrary interdependencies (e.g., ``complexity ratchet'' effects \citep{Liard2020,Soyer2006,Luke2011,gould1996full}) are necessary in ensuring preservation of new genome content \citep{Innan2010,Wagner1998,Tautz1992,Force1999,Bergthorsson2007}.
+Unlike our long-genome control, no adaptive benefit arose from neutral inserts (Figure~\ref{fig:results_panels}).
+Despite apparent opportunity for increased genome length to advantage adaptation, relatively few neutral inserts accumulated.
+Gene duplication induced much greater genome expansion than neutral inserts --- by a factor of nearly 4$\times$, despite equivalent site-creation potential (Supplementary Figure~\ref{fig:ablation-site-counts}).
+One possible explanation is selection against the mutational load arising from additional genome sites.
+Indeed, in preliminary experiments we found mutational load frequently drove shrinkage of founding ancestors' genome neutral genome content.
+This behavior supports theory that ``lock-in'' by dose effects or contingent interdependencies (e.g., ``complexity ratchet'' effects \citep{Liard2020,Soyer2006,Luke2011,gould1996full}) are essential to retention of new genome content \citep{Innan2010,Wagner1998,Tautz1992,Force1999,Bergthorsson2007}.
 
-\subsection{Duplicated sites are potentiated for complex traits}
+\subsection{Duplicated sites are potentiated for later adaptation}
 
-Through step-by-step analysis of lineage histories, we found that duplicated content was disproportionately likely to contribute to novel complex traits (Figure~\ref{fig:potentiation}).
-We found both that an outsized fraction of coding sites for newly gained adaptive traits arose from duplicated regions and that a substantial fraction of gain-of-function events (41 of 174 along analyzed lineages) directly coincided with slip duplications.
-Thus, the adaptive characteristics of slip duplication observed in our system appear to result from a combination of both immediate effects and potentiation for later gain-of-function.
-This pattern concords with large-scale analyses of biological genomes, which have revealed that a high fraction of genes show evidence of having arisen from duplications \citep{teichmann_structural_1998,Teichmann:2004cz}.
+By generation-by-generation analysis of lineage histories, we found that duplicated content was disproportionately likely to produce novel adaptations (Figure~\ref{fig:potentiation}).
+Specifically, we found both that an outsized fraction of new adaptations arose in duplicated regions and that many gain-of-function events (41 of 174 along analyzed lineages) directly coincided with slip duplications.
+Thus, the adaptive characteristics of slip duplication observed in our system reflect a combination of both immediate effects and potentiation.
+This pattern matches large-scale analyses of biological genomes, which find many genes as having likely arisen from duplications \citep{teichmann_structural_1998,Teichmann:2004cz}.
+Echoing our earlier finding that gene duplication outperforms raw genome size only in the evolution of complex adaptations, we also found adaptive potentiation of duplicated sites pertained only to complex adaptations.
 As such, given the abiotic instantiation of evolutionary processes explored in this work, our results suggest generality in long-standing hypotheses about the role of gene duplications in evolutionary innovation, particularly for traits requiring multiple interacting components.
 
 \subsection{Genome length drives genetic complexity}
