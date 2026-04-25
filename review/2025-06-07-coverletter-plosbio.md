@@ -4,24 +4,24 @@ Please find attached our manuscript, *Gene duplications potentiate adaptive evol
 
 **What is the scientific question you are addressing?**
 
-We use _in silico_ evolution experiments to directly test whether gene duplication can influence the evolution (a) structural and (b) functional biological complexity, and examine in detail the role of genetic information in duplicative inserts in stabilizing genome expansion and catalyzing adaptive evolution.
+We use _in silico_ evolution experiments to directly test how gene duplication influences the evolution (a) structural and (b) functional organismal complexity.
+We examine in detail how genetic information contained in duplicative inserts stabilizes genome expansion and catalyzes adaptive evolution.
 
 **What is the key finding that answers this question?**
 
-We find that gene duplication promotes *de novo* evolution of complex phentoypic traits via neo-functionalization.
-This effect is limited to complex traits, with adaptive evolution of simpler traits exhibiting no benefit beyond the effect of increased genome length alone.
-We find the adaptive benefit of gene duplication to be strongest in enabling adaptive evolution of complex, rather than simple, traits.
-Through step-by-step analysis of lineage histories, we trace an outsized fraction of coding sites for novel complex traits back to duplicated regions; similarly, this effect is also specific to complex traits, not being observed for simple traits.
+We confirm that gene duplication can in fact promote *de novo* evolution of adaptive traits, and that this effect is limited to complex traits.
+Through step-by-step analysis of lineage histories, we directly trace an outsized fraction of coding sites for novel complex traits back to duplicated regions, finding concrete evidence that duploicated regions can directly potentiate later adaptive evolution.
+This effect is also specific to complex traits, not being observed for simple traits.
 
 **What is the nature of the evidence you provide in support of your conclusion?**
 
 We report evolution experiments using the Avida platform for digital evolution that compare the adaptive evolution of complex traits both with and without gene duplication, in conjunction with lineage-based analyses examining genetic history underlying evolved traits.
-In this system, self-replicating computer programs act as a model organism for evolution experiments.
-To study phenotypic complexity, we use Lenski et al.'s Logic-9 framework for studying adaptive traits across a well-defined spectrum of phenotypic complexity, which defines a set of available metabolic functions with varying complexity based on the number of logical operations necessary to carry them out.
+In this system, self-replicating computer programs serve as a model organism for evolution experiments.
+To study phenotypic complexity, we use Lenski et al.'s Logic-9 framework for defining adaptive traits across an explicit spectrum of phenotypic complexity, varying in the number of logical operations necessary to carry them out.
 
-While consideration must be taken in generalizing results from Avida to biological organisms, in the context of our work, digital experiments offers unique capabilities for data-rich, rigorously-controlled evolutionary trials.
-Our computational medium enabled further work testing partial ablations of gene duplication mechanisms to separate the impact of propagating genetic information from side effects in increased genome length and increased effective mutation rate.
-We also take advantage of detailed lineage records to examine exact mutational histories of coding sites for phenotypic traits to discern the role of gene duplication.
+While consideration must be taken in generalizing results from Avida to biological organisms, digital experiments on the other hand offer unique capabilities for data-rich, rigorously-controlled evolutionary trials.
+Our computational medium enabled experiments testing analogs of gene duplication mechanisms, to separate the impact of propagating genetic information from side effects in genome expansion and mutational supply.
+We also take advantage of detailed lineage records to examine exact mutational histories of coding sites for phenotypic traits to test for association with gene duplication.
 
 > Lenski, R. E., Ofria, C., Pennock, R. T., & Adami, C. (2003). The evolutionary origin of complex features. Nature, 423(6936), 139–144. https://doi.org/10.1038/nature01568
 
@@ -46,18 +46,17 @@ Our experiments generally echo these findings, with newly evolved complex tasks 
 **What significance do your results have for the field?**
 
 Our study delivers direct experimental evidence that gene duplication can increase evolved complexity by facilitating adaptive innovation of complex traits.
-By testing an array of partial analogs for gene duplication and tracing detailed mutational steps along complete lineages, we demonstrate that:
+We demonstrate that:
 1. gene duplications can facilitate *de novo* origin of adaptive traits,
 2. this effect is pronounced for complex traits, and
 3. genetic information content propagated in duplications contributes to this advantage.
 
+As such, we deepen the body of evidence highlighting the role of duplicative processes in adaptive evolution, contributing new visibility into mechanistic detail around the interaction between genetic information, genome expansion, and adaptive evolution under gene duplication.
 These findings contrast notably with hypotheses that discount adaptive explanations for biological complexity.
-<!-- As such, this work provides a cornerstone complementary to comparative approaches in natural history. -->
 
 **What significance do your results have for the broader community (of biologists and/or the public)?**
 
-We deepen the body of evidence highlighting the role of duplicative processes in adaptive evolution, contributing new visibility into mechanistic detail around the interaction between genetic information, genome expansion, and adaptive evolution under gene duplication.
-Our findings also pertain to application-oriented work harnessing evolution as an optimization process, both *in vivo* and *in silico* (e.g., directed evolution or evolutionary computation) by identifying problem contexts where gene duplication processes may be most impactful (e.g., multi-component problems with potential to assemble functional building blocks).
+Our findings additionallu pertain to application-oriented work harnessing evolution as an optimization process, both *in vivo* and *in silico* (e.g., directed evolution or evolutionary computation) by identifying problem contexts where gene duplication processes may be most impactful (e.g., multi-component problems with potential to assemble functional building blocks).
 
 From a science communication perspective, lines of research working with ``evolution in action'' provide exciting opportunity to broaden public perceptions of evolutionary processes as an ongoing story rather than a historical record.
 
