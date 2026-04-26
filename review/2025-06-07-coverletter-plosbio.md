@@ -4,14 +4,17 @@ Please find attached our manuscript, *Gene duplications potentiate adaptive evol
 
 **What is the scientific question you are addressing?**
 
-We use _in silico_ evolution experiments to directly test how gene duplication influences the evolution (a) structural and (b) functional organismal complexity.
-We examine in detail how genetic information contained in duplicative inserts stabilizes genome expansion and catalyzes adaptive evolution.
+We use _in silico_ evolution experiments to directly test how gene duplication influences the evolution of (a) structural and (b) functional organismal complexity.
+We assess the specific contribution of genetic information contained in duplicative inserts, an resolve the precise causal relationships between duplications, genome expansion, and adaptive evolution.
 
 **What is the key finding that answers this question?**
 
-We confirm that gene duplication can in fact promote *de novo* evolution of adaptive traits, and that this effect is limited to complex traits.
-Through step-by-step analysis of lineage histories, we directly trace an outsized fraction of coding sites for novel complex traits back to duplicated regions, finding concrete evidence that duploicated regions can directly potentiate later adaptive evolution.
-This effect is also specific to complex traits, not being observed for simple traits.
+Comparing evolutionary trials with and without gene duplication, we confirm that gene duplication can systematically promote *de novo* evolution of adaptive traits.
+However, control treatments incorporating partial analogs of gene duplication reveal that the mechanistic role of duplicated genetic information differs between simple and complex adaptations.
+Genome expansion driven by insert content is sufficient to promote simple adaptations.
+By contrast, complex adaptations requiring multi-component functionality depend explicitly on the intact content of genetic insertions.
+Step-by-step analysis of lineage histories reveals that coding sites for complex traits, in fact, disproportionately trace back to duplicated regions --- indicating directly potentiation for later adaptive evolution.
+
 
 **What is the nature of the evidence you provide in support of your conclusion?**
 
