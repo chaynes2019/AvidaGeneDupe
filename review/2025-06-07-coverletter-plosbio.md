@@ -33,7 +33,7 @@ We also take advantage of detailed lineage records to directly trace duplication
 > Mihajlovic, L., Iyengar, B. R., Baier, F., Barbier, I., Iwaszkiewicz, J., Zoete, V., Wagner, A., & Schaerli, Y. (2025). A direct experimental test of Ohno’s hypothesis. eLife, 13, RP97216. doi:10.7554/eLife.97216
 elifesciences.org
 
-Compares rate of improvement for coGFP floursescence strength between single- vs. dual-copy populations under directed evolution conditions in an *E. coli* model.
+Compares rate of improvement for coGFP fluorescence strength between single- vs. dual-copy populations under directed evolution conditions in an *E. coli* model.
 The two-copy strain does not exhibit adaptive advantage, contrasting notably with present work.
 
 > Tong, K., Datta, S., Cheng, V., Haas, D. J., Gourisetti, S., Yopp, H. L., Day, T. C., Lac, D. T., Conlin, P. L., Bozdag, G. O., & Ratcliff, W. C. (2025). Genome duplication in a long-term multicellularity evolution experiment. Nature, 639, 691–699. doi:10.1038/s41586-025-08689-6
@@ -61,7 +61,7 @@ These findings contrast notably with hypotheses that discount adaptive explanati
 
 For application-oriented work harnessing evolution as an optimization process, both *in vivo* and *in silico* (e.g., directed evolution or evolutionary computation), our findings identify specific problem contexts where gene duplication processes may be most impactful (e.g., multi-component problems with potential to assemble functional building blocks).
 
-From a science communication perspective, research working with ``evolution in action'' provide an exciting opportunity to broaden public perceptions of evolutionary processes as an ongoing story rather than a historical record.
+From a science communication perspective, research working with ``evolution in action'' provides an exciting opportunity to broaden public perceptions of evolutionary processes as an ongoing story rather than a historical record.
 
 **What other novel findings do you present?**
 
