@@ -53,7 +53,7 @@ We demonstrate that:
 2. this effect is pronounced for complex traits, and
 3. genetic information content propagated in duplications contributes to this advantage.
 
-This work deepens the body of evidence highlighting the role of duplicative processes in adaptive evolution, contributing new visibility into mechanistic detail around the interaction between genetic information, genome expansion, and adaptive evolution under gene duplication.
+This work delivers uniquely direct, causal, and detailed experimental evidence for how gene duplication drives adaptive evolution, resolving detailed mechanistic interactions between duplicated sequence content, genome expansion, and evolutionary innovation.
 These findings contrast notably with hypotheses that discount adaptive explanations for biological complexity.
 
 **What significance do your results have for the broader community (of biologists and/or the public)?**
