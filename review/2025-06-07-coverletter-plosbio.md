@@ -12,6 +12,7 @@ We assess the specific contribution of genetic information contained in duplicat
 
 Comparing evolutionary trials with and without gene duplication, we demonstrate directly that gene duplication can systematically promote *de novo* evolution of adaptive traits.
 However, control treatments incorporating partial analogs of gene duplication reveal different mechanisms underlying simple versus complex adaptations.
+
 Genome expansion driven by insert content is sufficient to promote simple adaptations.
 By contrast, complex adaptations depend explicitly on the duplicated content of genetic insertions.
 Step-by-step analysis of lineage histories confirms that coding sites for complex traits, in fact, disproportionately trace back to duplicated regions --- indicating direct potentiation for later adaptive evolution.
