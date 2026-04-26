@@ -80,7 +80,5 @@ Note also that a precursor of this work appeared at the 2017 Artificial Life con
 
 By presenting our findings in PLOS Biology, we look forward to furthering the scientific conversation around how and why biological complexity evolves.
 
-
 Thank you for your consideration,
-
 The Authors
