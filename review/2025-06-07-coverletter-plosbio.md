@@ -65,12 +65,12 @@ These initial efforts open an exciting empirical frontier, and our _in silico_ e
 
 For application-oriented work harnessing evolution as an optimization process, both *in vivo* and *in silico* (e.g., directed evolution or evolutionary computation), our findings identify specific problem contexts where gene duplication processes may be most impactful (e.g., multi-component problems with potential to assemble functional building blocks).
 
-From a science communication perspective, research working with ``evolution in action'' provides an exciting opportunity to broaden public perceptions of evolutionary processes as an ongoing story rather than a historical record.
+From a science communication perspective, research working with "evolution in action" provides an exciting opportunity to broaden public perceptions of evolutionary processes as an ongoing story rather than a just historical record.
 
 **What other novel findings do you present?**
 
-- **Content of duplicative inserts drives genome expansion:** Gene duplication produced markedly larger genome size, compared to ablation treatments where duplications did not preserve sequence content --- including treatments where inserts comprised fully neutral content.
-- **Gene duplication boosts accumulation of vestigial coding sites:** Duplication greatly increased previously-coding sites released from selection, beyond the impact of larger genome size alone.
+- ***Content of duplicative inserts entrenches genome expansion:*** Gene duplication produced markedly larger genome size, compared to ablation treatments where duplications did not preserve sequence content --- including treatments where inserts comprised fully neutral content.
+- ***Gene duplication boosts accumulation of vestigial coding sites:*** Duplication greatly increased previously-coding sites released from selection, beyond the impact of larger genome size alone.
 
 **Is there additional information that we should take into account?**
 
