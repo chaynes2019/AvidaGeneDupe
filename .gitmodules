@@ -1,4 +1,0 @@
-[submodule "binder"]
-	path = binder
-	url = https://github.com/chaynes2019/AvidaGeneDupe.git
-	branch = binder
